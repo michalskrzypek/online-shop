@@ -1,6 +1,6 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="home">OnlineShop by Michal Skrzypek</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/home">OnlineShop by Michal Skrzypek</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -8,10 +8,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="productsList">View products</a>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/about">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/show/all/products">View products</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="contact">Contact</a>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a>
 					</li>
 				</ul>
 			</div>

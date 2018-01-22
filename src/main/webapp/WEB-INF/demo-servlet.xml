@@ -17,6 +17,7 @@
 
 	<!-- Mentioning where my controllers are -->
 	<context:component-scan base-package="pl.michalskrzypek.controller"></context:component-scan>
+	<context:component-scan base-package="pl.michalskrzypek.daoimpl"></context:component-scan>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

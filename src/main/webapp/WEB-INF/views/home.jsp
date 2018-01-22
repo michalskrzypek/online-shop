@@ -19,7 +19,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>${title }| OnlineShop</title>
+<title>${title } | OnlineShop</title>
 
 <!-- Bootstrap core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
@@ -37,15 +37,19 @@
 		<!-- Page Content -->
 		<div class="content">
 			<c:if test="${userClickedHome == true }">
-				<%@include file="shared/content.jsp"%>
+				<%@include file="content.jsp"%>
 			</c:if>
 
 			<c:if test="${userClickedAbout == true }">
-				<%@include file="shared/about.jsp"%>
+				<%@include file="about.jsp"%>
 			</c:if>
 
 			<c:if test="${userClickedContact == true }">
-				<%@include file="shared/contact.jsp"%>
+				<%@include file="contact.jsp"%>
+			</c:if>
+			
+			<c:if test="${userClickedShowAll == true or userClickedShowCategoryProducts == true}">
+				<%@include file="showProducts.jsp"%>
 			</c:if>
 
 		</div>
