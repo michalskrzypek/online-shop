@@ -6,9 +6,16 @@ import pl.michalskrzypek.entity.Category;
 
 public interface CategoryDAO {
 
-	public List<Category> listAll();
-	
-	public Category finById(int id);
-	
-}
+	public boolean add(Category category);
 
+	public boolean delete(int id);
+
+	public boolean update(Category category);
+
+	public boolean read(int id);
+
+	public List<Category> listAll();
+
+	public Category finById(int id);
+
+}

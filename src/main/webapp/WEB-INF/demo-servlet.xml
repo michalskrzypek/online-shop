@@ -16,8 +16,10 @@
     ">
 
 	<!-- Mentioning where my controllers are -->
-	<context:component-scan base-package="pl.michalskrzypek.controller"></context:component-scan>
-	<context:component-scan base-package="pl.michalskrzypek.daoimpl"></context:component-scan>
+	<context:component-scan base-package="pl.michalskrzypek"/>
+	
+	<bean id="multipartResolver"
+class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -28,7 +30,12 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
+<!-- 	
+	<bean id="sessionFactory" 
+            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    </bean> -->
+<!-- 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>  -->
 
 <mvc:annotation-driven />
 
