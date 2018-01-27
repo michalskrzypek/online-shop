@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import pl.michalskrzypek.dao.CategoryDAO;
+import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Category;
+import pl.michalskrzypek.entity.Product;
 
 public class CategoryTestCase {
 
@@ -18,6 +20,11 @@ public class CategoryTestCase {
 
 	private Category category;
 
+	
+	private static ProductDAO productDAO;
+	
+	private Product product;
+	
 	@BeforeClass
 	public static void init() {
 
@@ -27,9 +34,15 @@ public class CategoryTestCase {
 
 		categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
 
+		productDAO = (ProductDAO) context.getBean("productDAO");
+	}
+	
+	@Test
+	public void getActiveProdByCat() {
+		assertEquals("Problem with counting active products by category", 3, productDAO.listActiveProductsByCategory(1).size());
 	}
 
-	@Test
+/*	@Test
 	public void testCRUDOperation() {
 
 		category = new Category();
@@ -56,9 +69,9 @@ public class CategoryTestCase {
 		assertEquals("Deleting category", true, categoryDAO.delete(4));
 		
 		//reading active categories
-		assertEquals("Listing active categories", 1, categoryDAO.listAll().size());
+		assertEquals("Listing active categories", 1, categoryDAO.listActive().size());
 
-	}
+	}*/
 
 	/*
 	 * @Test public void testAddCategory() {

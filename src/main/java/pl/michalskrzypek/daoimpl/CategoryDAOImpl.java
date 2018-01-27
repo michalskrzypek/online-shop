@@ -21,7 +21,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	private SessionFactory sessionFactory;
 	
 
-	public List<Category> listAll() {
+	public List<Category> listActive() {
 		
 		String selectActiveCategory = "from Category where active = :active";
 		
@@ -33,7 +33,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return query.getResultList();
 	}
 
-	public Category finById(int id) {
+	public Category get(int id) {
 		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
 	}
@@ -77,7 +77,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 	}
 
-	public boolean read(int id) {
+	public boolean findById(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

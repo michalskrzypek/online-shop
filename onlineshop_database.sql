@@ -1,6 +1,6 @@
-CREATE TABLE category(Id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30), description VARCHAR(200), image_url VARCHAR(50), active BOOLEAN default true);
+CREATE TABLE category(Id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30), description VARCHAR(200), image_url VARCHAR(50), active BOOLEAN default true);
 
-
+INSERT INTO category(name, description, image_url, active) values()
 
 
 CREATE TABLE account (
@@ -28,8 +28,8 @@ CREATE TABLE product (
 	supplier_id INT,
 	purchases INT DEFAULT 0,
 	views INT DEFAULT 0,
- 	CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id),
-	CONSTRAINT fk_product_supplier_id FOREIGN KEY (supplier_id) REFERENCES account(id),
+ 	FOREIGN KEY (category_id) REFERENCES category (id) on delete cascade,
+	FOREIGN KEY (supplier_id) REFERENCES account(id)
 );	
 
 -- the address table to store user's billing and shipping addresses
@@ -42,7 +42,7 @@ CREATE TABLE address (
 	postal_code VARCHAR(10),
 	is_billing BOOLEAN,
 	is_shipping BOOLEAN,
-	CONSTRAINT fk_address_user_id FOREIGN KEY (account_id ) REFERENCES account(id)
+	FOREIGN KEY (account_id ) REFERENCES account(id)
 );
 
 -- the cart table to store user's cart top-level details
@@ -97,20 +97,20 @@ id int primary key auto_increment,
 
 
 -- adding three categories
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Smartphones', 'This is description for Smartphones category!', 'CAT_1.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Headphones', 'This is description for Headphones category!', 'CAT_2.png', true);
-INSERT INTO category (name, description,image_url,is_active) VALUES ('Accesories', 'This is description for Accesories category!', 'CAT_3.png', true);
+INSERT INTO category (name, description,image_url,active) VALUES ('Smartphones', 'This is description for Smartphones category!', 'CAT_1.png', true);
+INSERT INTO category (name, description,image_url,active) VALUES ('Headphones', 'This is description for Headphones category!', 'CAT_2.png', true);
+INSERT INTO category (name, description,image_url,active) VALUES ('Accesories', 'This is description for Accesories category!', 'CAT_3.png', true);
 -- adding three users 
 INSERT INTO account
 (first_name, last_name, role, active, password, email, contact_number) 
 VALUES ('Michal', 'Skrzypek', 'ADMIN', true, '$2a$06$ORtBskA2g5Wg0HDgRE5ZsOQNDHUZSdpJqJ2.PGXv0mKyEvLnKP7SW', 'mskrzypek97@gmail.com', '668229833');
-INSERT INTO user_detail 
+INSERT INTO account
 (first_name, last_name, role, active, password, email, contact_number) 
 VALUES ('John', 'Johnson', 'SUPPLIER', true, '$2a$06$bzYMivkRjSxTK2LPD8W4te6jjJa795OwJR1Of5n95myFsu3hgUnm6', 'jj@gmail.com', '444555666');
-INSERT INTO user_detail 
+INSERT INTO account
 (first_name, last_name, role, active, password, email, contact_number) 
 VALUES ('Mark', 'James', 'SUPPLIER', true, '$2a$06$i1dLNlXj2uY.UBIb9kUcAOxCigGHUZRKBtpRlmNtL5xtgD6bcVNOK', 'mj@gmail.com', '777888999');
-INSERT INTO user_detail 
+INSERT INTO account
 (first_name, last_name, role, active, password, email, contact_number) 
 VALUES ('Kyle', 'Carter', 'USER', true, '$2a$06$4mvvyO0h7vnUiKV57IW3oudNEaKPpH1xVSdbie1k6Ni2jfjwwminq', 'kc@gmail.com', '111222333');
 
@@ -126,7 +126,7 @@ VALUES ('PRDMNO123PQRX', 'Sennheiser HD 201', 'Sennheiser', 'Silver/Black ', 25,
 INSERT INTO product (code, name, brand, description, unit_price, quantity, active, category_id, supplier_id, purchases, views)
 VALUES ('PRDABCXYZDEFX', 'AKG N60', 'AKG', 'Black. Detachable cable with universal remote.', 200, 5, true, 2, 3, 0, 0 );
 -- adding a supplier correspondece address
-INSERT INTO address( account_id, street, city, state, country, postal_code, is_billing, is_shipping) 
-VALUES (4, '103 Darsey Road', 'New York', 'NY', 'USA', '111111', true, false );
+INSERT INTO address( account_id, street, city, country, postal_code, is_billing, is_shipping) 
+VALUES (4, '103 Darsey Road', 'New York', 'USA', '111111', true, false );
 -- adding a cart for testing 
-INSERT INTO cart (account_id, grand_total, cart_lines) VALUES (4, 0, 0)
+INSERT INTO cart (account_id, grand_total, cart_lines) VALUES (4, 0, 0);

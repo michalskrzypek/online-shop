@@ -21,7 +21,7 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
 		
-		mv.addObject("categories", categoryDAO.listAll());
+		mv.addObject("categories", categoryDAO.listActive());
 		mv.addObject("userClickedHome", true);
 		mv.addObject("title", "Home");
 		
@@ -51,7 +51,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userClickedShowAll", true);
 		mv.addObject("title", "All Products");
-		mv.addObject("categories", categoryDAO.listAll());
+		mv.addObject("categories", categoryDAO.listActive());
 		
 		return mv;
 	}
@@ -61,10 +61,10 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userClickedShowCategoryProducts", true);
 		
-		Category category = categoryDAO.finById(id);
+		Category category = categoryDAO.get(id);
 		mv.addObject("title", category.getName());
 		mv.addObject("category", category);
-		mv.addObject("categories", categoryDAO.listAll());
+		mv.addObject("categories", categoryDAO.listActive());
 		
 		return mv;
 	}

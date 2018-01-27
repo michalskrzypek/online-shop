@@ -19,14 +19,21 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>${title } | OnlineShop</title>
+<title>${title }| OnlineShop</title>
+
+<script>
+window.contextRoot = '${pageContext.request.contextPath}'
+</script>
 
 <!-- Bootstrap core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="${css}/main.css" rel="stylesheet">
+<link href="${css}/myApp.css" rel="stylesheet">
 <!--  Custom bootstrap theme-->
 <link href="${css}/bootstrap-theme.css" rel="stylesheet">
+<!--  Custom bootstrap for datatable -->
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -47,8 +54,9 @@
 			<c:if test="${userClickedContact == true }">
 				<%@include file="contact.jsp"%>
 			</c:if>
-			
-			<c:if test="${userClickedShowAll == true or userClickedShowCategoryProducts == true}">
+
+			<c:if
+				test="${userClickedShowAll == true or userClickedShowCategoryProducts == true}">
 				<%@include file="showProducts.jsp"%>
 			</c:if>
 
@@ -57,12 +65,18 @@
 		<%@include file="shared/footer.jsp"%>
 	</div>
 
-	<!-- Custom jquery file -->
+	<!-- Custom jquery file for particular bootstrap template-->
 	<script src="${js}/jquery.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="${js}/bootstrap.bundle.min.js"></script>
 	<script src="${js}/jquery.min.js"></script>
+	<!--JQuery datatable plugin  -->
+	<script src="${js}/jquery.dataTables.js"></script>
+		<!--Bootstrap custom template for JQuery datatable plugin  -->
+<script src="${js}/dataTables.bootstrap4.js"></script> 
 
+	<!--  Some javascript code written by myself-->
+	<script src="${js}/myApp.js"></script>
 </body>
 
 </html>

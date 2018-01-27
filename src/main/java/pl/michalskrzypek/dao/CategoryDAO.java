@@ -12,10 +12,10 @@ public interface CategoryDAO {
 
 	public boolean update(Category category);
 
-	public boolean read(int id);
+	public boolean findById(int id);
 
-	public List<Category> listAll();
+	public List<Category> listActive();
 
-	public Category finById(int id);
+	public Category get(int id);
 
 }
