@@ -43,10 +43,16 @@ if($table.length){
 				},
 			{data: 'id',
 			mRender: function(data,type,row){
-				
-				var str = '<a href="';
-				str+=window.contextRoot+'/cart/add/product/'+data+'" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
-				return str;
+				if(row.quantity == 0){
+					var str = '<a href="';
+					str+='" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+					return str;
+				}else{
+					var str = '<a href="';
+					str+=window.contextRoot+'/cart/add/product/'+data+'" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+					return str;
+				}
+
 			}	
 			
 			}

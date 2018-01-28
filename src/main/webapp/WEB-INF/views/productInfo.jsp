@@ -21,12 +21,27 @@
   <h1 class="display-3">${product.getName()}</h1>
    <p class="lead">${product.getDescription()}</p>
   <hr class="my-2">
-  <p>$${product.getUnitPrice()}<br>Quantity available: ${product.getQuantity() }</p>
- 
+  <p>$${product.getUnitPrice()}</p>
+<br>
+ <c:choose>
+  <c:when test="${product.getQuantity() > 0}">
+      <p>
+  Quantity available: ${product.getQuantity() }</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/cart/add/product/${product.getId()}" role="button">Add to cart!</a>
+    <a class="btn btn-success btn-lg" href="${pageContext.request.contextPath }/cart/add/product/${product.getId()}" role="button">Add to cart!</a>
     <a class="btn btn-secondary btn-lg" href="${pageContext.request.contextPath }/show/all/products" role="button">Continue shopping</a>
   </p>
+  </c:when>
+  <c:otherwise>
+      <p style="color:red">
+  Out of stock!</p>
+  <p class="lead">
+    <a class="btn btn-success btn-lg disabled" href="${pageContext.request.contextPath }/cart/add/product/${product.getId()}" role="button">Add to cart!</a>
+    <a class="btn btn-secondary btn-lg" href="${pageContext.request.contextPath }/show/all/products" role="button">Continue shopping</a>
+  </p>
+  </c:otherwise>
+  </c:choose>
+  
 </div>
 		</div>
 		

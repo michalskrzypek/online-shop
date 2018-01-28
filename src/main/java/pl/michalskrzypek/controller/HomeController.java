@@ -11,6 +11,7 @@ import pl.michalskrzypek.dao.CategoryDAO;
 import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
+import pl.michalskrzypek.exception.ProductNotFoundException;
 
 @Controller
 public class HomeController {
@@ -54,9 +55,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/show/product/{id}")
-	public ModelAndView showProduct(@PathVariable("id") int id) {
+	public ModelAndView showProduct(@PathVariable("id") int id) throws ProductNotFoundException{
 		ModelAndView mv = new ModelAndView("home");
 		Product product = productDAO.get(id);
+		
+		if(product == null) {
+			throw new ProductNotFoundException();
+		}
+		
 		int categoryId = product.getCategoryId();
 		Category category = categoryDAO.get(categoryId);
 		mv.addObject("userClickedShowProduct", true);

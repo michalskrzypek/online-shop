@@ -125,6 +125,8 @@ INSERT INTO product (code, name, brand, description, unit_price, quantity, activ
 VALUES ('PRDMNO123PQRX', 'Sennheiser HD 201', 'Sennheiser', 'Silver/Black ', 25, 3, true, 2, 2, 0, 0 );
 INSERT INTO product (code, name, brand, description, unit_price, quantity, active, category_id, supplier_id, purchases, views)
 VALUES ('PRDABCXYZDEFX', 'AKG N60', 'AKG', 'Black. Detachable cable with universal remote.', 200, 5, true, 2, 3, 0, 0 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, active, category_id, supplier_id, purchases, views)
+VALUES ('PRD123XYZDEFX', 'Sony Xperia X', 'Sony', 'Black. Some descriptio for Sony Xperia X.', 230, 0, true, 2, 3, 0, 0 );
 -- adding a supplier correspondece address
 INSERT INTO address( account_id, street, city, country, postal_code, is_billing, is_shipping) 
 VALUES (4, '103 Darsey Road', 'New York', 'USA', '111111', true, false );
