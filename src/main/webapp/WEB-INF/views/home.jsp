@@ -19,20 +19,22 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>${title }| OnlineShop</title>
+<title>${title} | OnlineShop</title>
 
 <script>
 window.contextRoot = '${pageContext.request.contextPath}'
 </script>
 
-<!-- Bootstrap core CSS -->
-<link href="${css}/bootstrap.min.css" rel="stylesheet">
+
 <!-- Custom styles for this template -->
-<link href="${css}/myApp.css" rel="stylesheet">
+<link href="${css}/myApp.css" rel="stylesheet"> 
 <!--  Custom bootstrap theme-->
 <link href="${css}/bootstrap-theme.css" rel="stylesheet">
 <!--  Custom bootstrap for datatable -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 
@@ -60,6 +62,13 @@ window.contextRoot = '${pageContext.request.contextPath}'
 				<%@include file="showProducts.jsp"%>
 			</c:if>
 
+
+			<c:if
+				test="${userClickedShowProduct == true }">
+				<%@include file="productInfo.jsp"%>
+			</c:if>
+
+
 		</div>
 		<!-- Footer -->
 		<%@include file="shared/footer.jsp"%>
@@ -69,6 +78,7 @@ window.contextRoot = '${pageContext.request.contextPath}'
 	<script src="${js}/jquery.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="${js}/bootstrap.bundle.min.js"></script>
+		<script src="${js}/bootstrap.min.js"></script>
 	<script src="${js}/jquery.min.js"></script>
 	<!--JQuery datatable plugin  -->
 	<script src="${js}/jquery.dataTables.js"></script>

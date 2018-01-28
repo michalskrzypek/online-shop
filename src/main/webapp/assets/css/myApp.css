@@ -3,14 +3,10 @@ height:100%;
 }
 
 body {
-  padding-top: 54px;
   height:100%;
 }
 
 @media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
 }
 .content{
 	padding-top:40px;
@@ -39,3 +35,21 @@ body {
 	color: white;
 	padding-top:10px;
 }
+
+.dataTableImg{
+	
+	width:60px;
+	padding:0;
+	margin:0;
+	
+}
+
+.float-left{
+	width:25%;
+
+} 
+.float-left .img-fluid{
+	
+	width:100%;
+	
+} 

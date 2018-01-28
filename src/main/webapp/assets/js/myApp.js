@@ -6,10 +6,8 @@ if($table.length){
 	
 	if(window.categoryId == ''){
 		jsonUrl = window.contextRoot + '/json/data/all/products';
-		console.log('YES');
 	}else{
 		jsonUrl = window.contextRoot + '/json/data/category/'+  window.categoryId +'/products';
-		console.log('NO');
 	}
 	
 	$table.DataTable({
@@ -20,11 +18,39 @@ if($table.length){
 			dataSrc : ''
 		},
 		columns: [
-			{data : 'id'},
+			{data: 'code',
+				mRender: function(data, type, row){
+					var src = '<img src="'+window.contextRoot+'/resources/images/'+data+'.jpg" class="dataTableImg"/>';	
+					return src;
+				}
+				
+			
+			},
+			
 			{data : 'name'},
 			{data : 'brand'},
-			{data : 'unitPrice'},
-			{data : 'quantity'}
+			{data : 'unitPrice',
+				mRender: function(data, type, row){
+					return '&#36;'+data
+				}
+			},
+			{data : 'id',
+				mRender: function(data, type,row){
+					
+					var str ='<a href="'+ window.contextRoot+'/show/product/'+data+'" class="btn btn-secondary"><span class="glyphicon glyphicon-eye-open"></span></a>';
+					return str;
+				}	
+				},
+			{data: 'id',
+			mRender: function(data,type,row){
+				
+				var str = '<a href="';
+				str+=window.contextRoot+'/cart/add/product/'+data+'" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+				return str;
+			}	
+			
+			}
+			
 		]
 		
 		

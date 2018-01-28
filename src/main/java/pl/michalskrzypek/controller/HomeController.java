@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.CategoryDAO;
+import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Category;
+import pl.michalskrzypek.entity.Product;
 
 @Controller
 public class HomeController {
@@ -17,6 +19,9 @@ public class HomeController {
 	@Autowired
 	CategoryDAO categoryDAO;
 	
+	@Autowired
+	ProductDAO productDAO;
+	
 	@RequestMapping({"/", "/home"})
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
@@ -24,6 +29,8 @@ public class HomeController {
 		mv.addObject("categories", categoryDAO.listActive());
 		mv.addObject("userClickedHome", true);
 		mv.addObject("title", "Home");
+		
+		mv.addObject("products", productDAO.listActiveProducts());
 		
 		return mv;
 	}
@@ -45,14 +52,18 @@ public class HomeController {
 		
 		return mv;
 	}
-
-	@RequestMapping("/show/all/products")
-	public ModelAndView showAllProducts() {
+	
+	@RequestMapping("/show/product/{id}")
+	public ModelAndView showProduct(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("userClickedShowAll", true);
-		mv.addObject("title", "All Products");
+		Product product = productDAO.get(id);
+		int categoryId = product.getCategoryId();
+		Category category = categoryDAO.get(categoryId);
+		mv.addObject("userClickedShowProduct", true);
+		mv.addObject("title", product.getName());
+		mv.addObject("product", product);
+		mv.addObject("category", category);
 		mv.addObject("categories", categoryDAO.listActive());
-		
 		return mv;
 	}
 	
@@ -69,6 +80,17 @@ public class HomeController {
 		return mv;
 	}
 	
+	@RequestMapping("/show/all/products")
+	public ModelAndView showAllProducts() {
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("userClickedShowAll", true);
+		mv.addObject("title", "All Products");
+		mv.addObject("categories", categoryDAO.listActive());
+		
+		return mv;
+	}
+	
+
 	
 /*	@RequestMapping({"/","/index"})
 	public ModelAndView home(@RequestParam(value="greeting") String greeting) {

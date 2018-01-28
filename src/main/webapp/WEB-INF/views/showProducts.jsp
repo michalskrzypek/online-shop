@@ -40,13 +40,12 @@
 					<thead>
 
 						<tr>
-						
-						<th>ID</th>
+						<th></th>
 						<th>Name</th>
 						<th>Brand</th>
 						<th>Price</th>
-						<th>Quantity</th>
-						
+						<th style="width:10%; font-size:0.7em">View product</th>
+						<th style ="width:10%; font-size: 0.7em">Add to cart</th>
 						</tr>
 						
 					</thead>
