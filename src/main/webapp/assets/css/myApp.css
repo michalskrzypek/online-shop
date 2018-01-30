@@ -53,3 +53,16 @@ body {
 	width:100%;
 	
 } 
+
+
+.card-img-top {
+	
+	width: 20px;
+	height:220px;
+}
+
+.help-block {
+	
+	color: red;
+	
+}

@@ -37,10 +37,19 @@ public class CategoryTestCase {
 		productDAO = (ProductDAO) context.getBean("productDAO");
 	}
 	
-	@Test
+/*	@Test
 	public void getActiveProdByCat() {
 		assertEquals("Problem with counting active products by category", 3, productDAO.listActiveProductsByCategory(1).size());
 	}
+	*/
+
+	  @Test public void testUpdateProduct() { product= productDAO.get(6);
+	  product.setName("UPDATED");
+	  assertEquals("updating a product", true,
+	  productDAO.update(product));
+	  
+	  }
+	 
 
 /*	@Test
 	public void testCRUDOperation() {

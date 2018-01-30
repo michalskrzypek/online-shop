@@ -96,21 +96,5 @@ public class HomeController {
 		return mv;
 	}
 	
-
-	
-/*	@RequestMapping({"/","/index"})
-	public ModelAndView home(@RequestParam(value="greeting") String greeting) {
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("greeting", greeting);
-		return mv;
-	}*/
-	
-/*	@RequestMapping("/{greeting}")
-	public ModelAndView homeParam(@PathVariable(value="greeting") String greeting) {
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("greeting", greeting);
-		return mv;
-	}
-	*/
 	
 }

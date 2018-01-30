@@ -16,8 +16,8 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="OnlineShop is my first spring and hibernate project.">
+<meta name="author" content="Michal Skrzypek">
 
 <title>${title} | OnlineShop</title>
 
@@ -66,6 +66,11 @@ window.contextRoot = '${pageContext.request.contextPath}'
 			<c:if
 				test="${userClickedShowProduct == true }">
 				<%@include file="productInfo.jsp"%>
+			</c:if>
+
+			<c:if
+				test="${userClickedManageProduct == true }">
+				<%@include file="productManagement.jsp"%>
 			</c:if>
 
 

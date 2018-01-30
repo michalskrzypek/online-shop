@@ -101,4 +101,18 @@ public class ProductDAOImpl implements ProductDAO {
 		return query.getResultList();
 	}
 
+	public List<Product> listAll() {
+		// TODO Auto-generated method stub
+		
+		String dbQuery = "from Product";
+		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
+		return query.getResultList();
+		
+		
+	/*	String dbQuery = "from product";
+		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
+		
+		return query.getResultList();*/
+	}
+
 }

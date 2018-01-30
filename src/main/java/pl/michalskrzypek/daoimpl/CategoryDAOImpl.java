@@ -77,10 +77,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 	}
 
-	public boolean findById(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 /*	public boolean changeActivity(String name) {
 		// TODO Auto-generated method stub

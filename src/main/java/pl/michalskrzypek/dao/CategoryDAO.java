@@ -12,8 +12,6 @@ public interface CategoryDAO {
 
 	public boolean update(Category category);
 
-	public boolean findById(int id);
-
 	public List<Category> listActive();
 
 	public Category get(int id);

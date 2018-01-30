@@ -22,6 +22,8 @@ public interface ProductDAO {
 	public List<Product> listActiveProductsByCategory(int categoryId);
 	
 	public List<Product> getLatestActiveProducts(int count);
+	
+	public List<Product> listAll();
 
 	
 	
