@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
@@ -40,9 +41,23 @@ public class Product {
 	private int quantity;
 	private boolean active;
 	
+	
 	@JsonIgnore
 	@Column(name = "category_id")
 	private int categoryId;
+	
+	
+/*	@ManyToOne
+	private Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}*/
+	
 	
 	@JsonIgnore
 	@Column(name = "supplier_id")
@@ -144,12 +159,6 @@ public class Product {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
-				+ description + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", active=" + active
-				+ ", categoryId=" + categoryId + ", supplierId=" + supplierId + ", purchases=" + purchases + ", views="
-				+ views + "]";
-	}
+
 
 }

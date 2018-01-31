@@ -1,5 +1,7 @@
 package pl.michalskrzypek.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -18,13 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.CategoryDAO;
 import pl.michalskrzypek.dao.ProductDAO;
+import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.utility.FileUploadUtility;
 
 @Controller
 @RequestMapping("/manage")
 @SessionAttributes("product")
-public class ProductManagementController {
+public class ManagementController {
 
 	@Autowired
 	CategoryDAO categoryDAO;
@@ -33,12 +36,24 @@ public class ProductManagementController {
 	ProductDAO productDAO;
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
-	public ModelAndView productsManagement() {
+	public ModelAndView productsManagement(@RequestParam(name = "success", required = false) String success,
+			@RequestParam(name = "name", required = false) String name) {
 		ModelAndView mv = new ModelAndView("home");
 
 		mv.addObject("title", "Product management");
 		mv.addObject("userClickedManageProduct", true);
-		mv.addObject("categories", categoryDAO.listActive());
+
+		if (success != null) {
+			if (success.equals("addProduct")) {
+				mv.addObject("message", "Product <b>" + name + "</b> added successfully!");
+			} else if (success.equals("addCategory")) {
+				mv.addObject("message", "Category added successfully!");
+			} else if (success.equalsIgnoreCase("deleteProduct")) {
+				mv.addObject("message", "Product <b>" + name + "</b> has been deleted successfully!");
+			} else if (success.equalsIgnoreCase("updateProduct")) {
+				mv.addObject("message", "Product <b>" + name + "</b> has been updated successfully!");
+			}
+		}
 
 		Product newProduct = new Product();
 		mv.addObject("product", newProduct);
@@ -51,44 +66,52 @@ public class ProductManagementController {
 		ModelAndView mv = new ModelAndView("home");
 
 		mv.addObject("title", "Product Management");
-		mv.addObject("categories", categoryDAO.listActive());
 		mv.addObject("userClickedManageProduct", true);
 
 		Product modifiedProduct = productDAO.get(id);
 
 		mv.addObject("product", modifiedProduct);
-		System.out.println(modifiedProduct.getCode());
 		return mv;
 
 	}
 
 	@RequestMapping(value = "/products", method = RequestMethod.POST)
-	public ModelAndView addProduct(@Valid @ModelAttribute("product") Product product, BindingResult results) {
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("categories", categoryDAO.listActive());
-		mv.addObject("title", "Product management");
-		mv.addObject("userClickedManageProduct", true);
+	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult results, Model model) {
 
-		
+		String returnStatement = "";
+
 		if (!results.hasErrors()) {
 			if (product.getId() == 0) {
 				product.setSupplierId(3);
 				product.setActive(true);
 				productDAO.add(product);
-				mv.addObject("message", "Successfully <b>added</b> product with ID:" + product.getId());
+
+				if (!product.getMultipartFile().getOriginalFilename().equals("")
+						&& product.getMultipartFile() != null) {
+					FileUploadUtility.UploadFile(product.getMultipartFile(), product.getCode());
+				}
+
+				returnStatement = "redirect:/manage/products?success=addProduct&name=" + product.getName();
+
 			} else {
 				productDAO.update(product);
-				mv.addObject("message", "Successfully <b>updated</b> product with ID:" + product.getId());
+
+				if (!product.getMultipartFile().getOriginalFilename().equals("")
+						&& product.getMultipartFile() != null) {
+					FileUploadUtility.UploadFile(product.getMultipartFile(), product.getCode());
+				}
+
+				returnStatement = "redirect:/manage/products?success=updateProduct&name=" + product.getName();
 			}
+		} else {
+			model.addAttribute("title", "Products management");
+			model.addAttribute("message", "Validation fails for adding the product!");
+			model.addAttribute("userClickedManageProduct", true);
+			return "home";
+
 		}
 
-		if (!product.getMultipartFile().getOriginalFilename().equals("") && product.getMultipartFile() != null) {
-			FileUploadUtility.UploadFile(product.getMultipartFile(), product.getCode());
-		}
-
-		Product newProduct = new Product();
-		mv.addObject("product", newProduct);
-		return mv;
+		return returnStatement;
 	}
 
 	@RequestMapping(value = "/product/activity/{id}", method = RequestMethod.POST)
@@ -96,7 +119,6 @@ public class ProductManagementController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("title", "Product management");
 		mv.addObject("userClickedManageProduct", true);
-		mv.addObject("categories", categoryDAO.listActive());
 
 		boolean isActive = new Boolean(activity);
 		Product product = productDAO.get(id);
@@ -118,25 +140,45 @@ public class ProductManagementController {
 		return mv;
 
 	}
-	
-	@RequestMapping(value = "/product/delete/{id}", method = RequestMethod.POST)
-	public ModelAndView deleteProduct(@PathVariable("id") int id) {
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("title", "Product management");
-		mv.addObject("userClickedManageProduct", true);
-		mv.addObject("categories", categoryDAO.listActive());
+
+	@RequestMapping(value = "/product/delete/{id}")
+	public String deleteProduct(@PathVariable("id") int id) {
 
 		Product product = productDAO.get(id);
-		
-		mv.addObject("message", "Product: <b>" + product.getName() + "</b> was deleted!");
+		String name = product.getName();
 		productDAO.delete(product.getId());
 
-		
-		Product newProduct = new Product();
-		mv.addObject("product", newProduct);
+		return "redirect:/manage/products?success=deleteProduct&name=" + name;
 
-		return mv;
+	}
 
+	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
+	public String addNewCategory(@Valid @ModelAttribute("category") Category category, BindingResult results,
+			Model model) {
+
+		if (!results.hasErrors()) {
+			categoryDAO.add(category);
+			String name = category.getName();
+			return "redirect:/manage/products?success=addCategory&name=" + name;
+		} else {
+			model.addAttribute("userClickedManageProduct", true);
+			model.addAttribute("message", "Category validation failed");
+			model.addAttribute("title", "Products Management");
+			return "home";
+		}
+
+	}
+
+	@ModelAttribute("categories")
+	public List<Category> getCategories() {
+		return categoryDAO.listActive();
+	}
+
+	@ModelAttribute("category")
+	public Category getCategory() {
+		Category newCategory = new Category();
+		newCategory.setActive(true);
+		return newCategory;
 	}
 
 }

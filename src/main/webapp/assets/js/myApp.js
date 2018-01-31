@@ -177,3 +177,57 @@ $adminTable
 			]
 
 		});
+
+/* Category validation using jquery validate */
+
+/*var $form = $('#categoryForm');
+
+if($form.length){
+	
+	
+	$form.validate({
+	
+		
+		rules:{
+			name:{
+				required : true,
+				minlength:2
+			},
+			description:{
+				
+				required : true,
+				minlength:5
+				
+			}
+		},
+		
+		messages:{
+			name:{
+				required : 'Please add a name!',
+				minlength: 'Minimum length for name is 2'
+			},
+			description:{
+				
+				required: 'Please add a description',
+				minlength:'Minimum length for description is 5'
+				
+			}
+		},
+		
+		
+		errorElement: 'em',
+		errorPlacement: function(error, element){
+			error.addClass('help-block'),
+			error.insertAfter(element)
+		}
+		
+	})
+	
+	
+	
+}
+
+*/
+
+
+

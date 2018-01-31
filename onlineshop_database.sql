@@ -1,7 +1,5 @@
 CREATE TABLE category(Id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30), description VARCHAR(200), image_url VARCHAR(50), active BOOLEAN default true);
 
-INSERT INTO category(name, description, image_url, active) values()
-
 
 CREATE TABLE account (
 	id int primary key auto_increment,

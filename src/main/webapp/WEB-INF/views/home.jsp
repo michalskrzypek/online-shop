@@ -16,26 +16,28 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="OnlineShop is my first spring and hibernate project.">
+<meta name="description"
+	content="OnlineShop is my first spring and hibernate project.">
 <meta name="author" content="Michal Skrzypek">
 
-<title>${title} | OnlineShop</title>
+<title>${title}|OnlineShop</title>
 
 <script>
-window.contextRoot = '${pageContext.request.contextPath}'
+	window.contextRoot = '${pageContext.request.contextPath}'
 </script>
 
 
-<!-- Custom styles for this template -->
-<link href="${css}/myApp.css" rel="stylesheet"> 
+
 <!--  Custom bootstrap theme-->
 <link href="${css}/bootstrap-theme.css" rel="stylesheet">
 <!--  Custom bootstrap for datatable -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Custom styles for this template -->
+<link href="${css}/myApp.css" rel="stylesheet">
 </head>
 
 <body>
@@ -63,13 +65,11 @@ window.contextRoot = '${pageContext.request.contextPath}'
 			</c:if>
 
 
-			<c:if
-				test="${userClickedShowProduct == true }">
+			<c:if test="${userClickedShowProduct == true }">
 				<%@include file="productInfo.jsp"%>
 			</c:if>
 
-			<c:if
-				test="${userClickedManageProduct == true }">
+			<c:if test="${userClickedManageProduct == true }">
 				<%@include file="productManagement.jsp"%>
 			</c:if>
 
@@ -83,13 +83,16 @@ window.contextRoot = '${pageContext.request.contextPath}'
 	<script src="${js}/jquery.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="${js}/bootstrap.bundle.min.js"></script>
-		<script src="${js}/bootstrap.min.js"></script>
+	<script src="${js}/bootstrap.min.js"></script>
 	<script src="${js}/jquery.min.js"></script>
 	<!--JQuery datatable plugin  -->
 	<script src="${js}/jquery.dataTables.js"></script>
-		<!--Bootstrap custom template for JQuery datatable plugin  -->
-<script src="${js}/dataTables.bootstrap4.js"></script> 
-
+	<!--Bootstrap custom template for JQuery datatable plugin  -->
+	<script src="${js}/dataTables.bootstrap4.js"></script>
+	
+	<!--  jquery code for category form validation-->
+	<script src="${js}/jquery.validate.js"></script>
+	<script src="${js}/jquery.validate.min.js"></script>
 	<!--  Some javascript code written by myself-->
 	<script src="${js}/myApp.js"></script>
 </body>
