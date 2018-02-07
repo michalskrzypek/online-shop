@@ -15,9 +15,9 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "account_id")
+/*	@Column(name = "account_id")
 	private int accountId;
-
+*/
 	
 	@Column(name = "grand_total")
 	private double grandTotal;
@@ -25,7 +25,7 @@ public class Cart {
 	@Column(name = "cart_lines")
 	private int cartLines;
 
-	/*	
+	
 	@OneToOne
 	private Account account;
 	
@@ -35,7 +35,7 @@ public class Cart {
 
 	public void setAccount(Account account) {
 		this.account = account;
-	}*/
+	}
 	
 	public int getId() {
 		return id;
@@ -60,7 +60,7 @@ public class Cart {
 	public void setCartLines(int cartLines) {
 		this.cartLines = cartLines;
 	}
-
+/*
 	public int getAccountId() {
 		return accountId;
 	}
@@ -68,7 +68,7 @@ public class Cart {
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
-
+*/
 
 	
 	

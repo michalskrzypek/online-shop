@@ -122,13 +122,12 @@ public class ManagementController {
 
 		boolean isActive = new Boolean(activity);
 		Product product = productDAO.get(id);
-
+		product.setActive(isActive);
+		
 		if (isActive) {
 			// for true
-			product.setActive(true);
 			mv.addObject("message", "Product: <b>" + product.getName() + "</b> is active now!");
 		} else {
-			product.setActive(false);
 			mv.addObject("message", "Product: <b>" + product.getName() + "</b> was deactivated.");
 		}
 

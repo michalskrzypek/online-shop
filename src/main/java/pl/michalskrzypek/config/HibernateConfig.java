@@ -27,7 +27,7 @@ public class HibernateConfig {
 	// Hibernate needs it to distinguish what syntax to use for specific database.
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 
-	@Bean
+	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 
 		BasicDataSource dataSource = new BasicDataSource();

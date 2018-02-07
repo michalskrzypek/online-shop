@@ -85,7 +85,6 @@ if ($table.length) {
 var $adminTable = $('#admin_products_table');
 
 jsonURL = window.contextRoot + '/json/data/admin/all/products';
-
 $adminTable
 		.DataTable({
 			lengthMenu : [
@@ -94,7 +93,8 @@ $adminTable
 							'All products' ] ],
 			pageLength : 20,
 			ajax : {
-				url : jsonURL,
+
+			    url : jsonURL,
 				dataSrc : ''
 			},
 

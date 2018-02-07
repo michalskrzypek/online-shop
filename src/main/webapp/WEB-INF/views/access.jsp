@@ -2,16 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	isELIgnored="false" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+	
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +22,7 @@
 <meta name="description"
 	content="OnlineShop is my first spring and hibernate project.">
 <meta name="author" content="Michal Skrzypek">
-   <meta name="_csrf_parameter" content="_csrf" />
-        <meta name="_csrf_header" content="X-CSRF-TOKEN" />
-        <meta name="_csrf" content="e62835df-f1a0-49ea-bce7-bf96f998119c" />
-  
+
 <title>${title}|OnlineShop</title>
 
 <script>
@@ -51,69 +46,20 @@
 <body>
 	<div class="wrapper">
 		<!-- Navigation -->
-
 		<%@include file="shared/navigation.jsp"%>
 
-
 		<!-- Page Content -->
-
 		<div class="content">
-
 			<div class="container">
-
 				<div class="row">
-					<div class="col-xs-4">
-
-
-						<c:if test="${param.success == 'login'}">
-							<div class="alert alert-success">
-								<strong>You have been logged in successfully!</strong>
-							</div>
-						</c:if>
-						
-						<c:if test="${param.success == 'logout'}">
-							<div class="alert alert-info">
-								<strong>You have been logged out successfully!</strong>
-							</div>
-						</c:if>
-						
-						<c:if test="${param.success == 'register'}">
-							<div class="alert alert-success">
-								<strong>Account has been created successfully!</strong>
-							</div>
-						</c:if>
-						
-					</div>
+				<c:if test="${action == 'signup' }">
+					<%@include file="signup.jsp"%>
+					</c:if>
+					<c:if test="${action == 'login' }">
+					<%@include file="login.jsp"%>
+					</c:if>
 				</div>
 			</div>
-
-
-			<c:if test="${userClickedHome == true }">
-				<%@include file="content.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickedAbout == true }">
-				<%@include file="about.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickedContact == true }">
-				<%@include file="contact.jsp"%>
-			</c:if>
-
-			<c:if
-				test="${userClickedShowAll == true or userClickedShowCategoryProducts == true}">
-				<%@include file="showProducts.jsp"%>
-			</c:if>
-
-
-			<c:if test="${userClickedShowProduct == true }">
-				<%@include file="productInfo.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickedManageProduct == true }">
-				<%@include file="productManagement.jsp"%>
-			</c:if>
-
 		</div>
 		<!-- Footer -->
 		<%@include file="shared/footer.jsp"%>

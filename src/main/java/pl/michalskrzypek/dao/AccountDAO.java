@@ -16,6 +16,10 @@ public interface AccountDAO {
 	
 	public Account get(String email);
 	
+	public Account getActive(int id);
+	
+	public Account getActive(String email);
+	
 	public boolean delete(Account account);
 	
 	public boolean update(Account account);
@@ -36,8 +40,9 @@ public interface AccountDAO {
 	
 	
 	//Cart management
-	public boolean addCart(Cart cart);
-	
+	//I Excluded addCart method because new cart is attached to account everytime account is created
+/*	public boolean addCart(Cart cart);
+	*/
 	public boolean updateCart(Cart cart);
 	
 	public Cart getCart(int accountId);

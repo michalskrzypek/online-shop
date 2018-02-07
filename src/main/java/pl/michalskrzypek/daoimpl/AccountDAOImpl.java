@@ -65,6 +65,31 @@ public class AccountDAOImpl implements AccountDAO {
 			return null;
 		}
 	}
+	
+	public Account getActive(int id) {
+		String selectQuery = "FROM Account WHERE id = :id and active = :active";
+		try {
+			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class).setParameter("id", id).setParameter("active",true)
+					.getSingleResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Account getActive(String email) {
+		String selectQuery = "FROM Account WHERE email = :email and active = :active";
+		try {
+			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class)
+					.setParameter("email", email).setParameter("active",true).getSingleResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 
 	public boolean delete(Account account) {
@@ -131,7 +156,7 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	//Cart management
 
-	public boolean addCart(Cart cart) {
+/*	public boolean addCart(Cart cart) {
 		try {
 			sessionFactory.getCurrentSession().persist(cart);
 			return true;
@@ -140,7 +165,7 @@ public class AccountDAOImpl implements AccountDAO {
 			return false;
 		}
 
-	}
+	}*/
 
 	public boolean updateCart(Cart cart) {
 		try {
@@ -156,6 +181,7 @@ public class AccountDAOImpl implements AccountDAO {
 		String dbQuery = "FROM Cart where accountId = :accountId";
 		return sessionFactory.getCurrentSession().createQuery(dbQuery, Cart.class).setParameter("accountId", accountId).getSingleResult();
 	}
+
 
 
 

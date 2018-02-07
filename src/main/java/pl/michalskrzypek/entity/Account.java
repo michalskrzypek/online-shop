@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Account {
@@ -17,10 +19,10 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
+	@NotBlank
 	@Column(name = "first_name")
 	private String firstName;
-	
+	@NotBlank
 	@Column(name = "last_name")
 	private String lastName;
 	
@@ -29,14 +31,18 @@ public class Account {
 	
 	private boolean active;
 	
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[A-Za-z]{2,6}$", message = "Wrong email")
+	@NotBlank
 	private String email;
 	
+	@NotBlank
 	private String password;
 	
+	@NotBlank
 	@Column(name = "contact_number")
 	private String phoneNumber;
 
-/*	@OneToOne(mappedBy="account", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="account", cascade = CascadeType.ALL)
 	Cart cart;
 	
 	public Cart getCart() {
@@ -45,8 +51,16 @@ public class Account {
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
-	}*/
+	}
 
+	public Account() {
+		Cart cart = new Cart();
+		cart.setAccount(this);
+		this.setCart(cart);
+		
+		this.active = true;
+	}
+	
 	public int getId() {
 		return id;
 	}
