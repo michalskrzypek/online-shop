@@ -13,11 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.entity.Account;
-import pl.michalskrzypek.validation.AccountValidation;
 
 @Controller
 public class UserAccessController {
-	
+
 	@Autowired
 	AccountDAO accountDAO;
 
@@ -25,44 +24,35 @@ public class UserAccessController {
 	public ModelAndView goSignUp() {
 		ModelAndView mv = new ModelAndView("access");
 		mv.addObject("title", "Sign Up");
-mv.addObject("action", "signup");
+		mv.addObject("action", "signup");
 		Account account = new Account();
 		mv.addObject("account", account);
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signUp(@Valid @ModelAttribute("account") Account account, BindingResult results, Model model) {
 
-		AccountValidation accountValidation = new AccountValidation();
-		accountValidation.validate(accountValidation, results);
 		model.addAttribute("action", "signup");
-		
-		if(!results.hasErrors()) {
+
+		if (!results.hasErrors()) {
 			accountDAO.addAccount(account);
 			return "redirect:/home?success=register";
 		}
 
-
-
 		return "access";
 	}
-
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView goLogin() {
 		ModelAndView mv = new ModelAndView("access");
 		mv.addObject("title", "Login");
 		mv.addObject("action", "login");
-		Account account = new Account();
-		mv.addObject("account", account);
+/*		Account account = new Account();
+		mv.addObject("account", account);*/
 
 		return mv;
 	}
 
-
-
-
-	
 }

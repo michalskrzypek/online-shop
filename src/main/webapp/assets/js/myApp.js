@@ -52,7 +52,7 @@ if ($table.length) {
 										+ window.contextRoot
 										+ '/show/product/'
 										+ data
-										+ '" class="btn btn-secondary"><span class="glyphicon glyphicon-eye-open"></span></a>';
+										+ '" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>';
 								return str;
 							}
 						},
@@ -61,7 +61,8 @@ if ($table.length) {
 							mRender : function(data, type, row) {
 								if (row.quantity == 0) {
 									var str = '<a href="';
-									str += '" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+									str += '" class="btn btn-secondary disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+									str+='<em class="help-block"> Out of stock! </em> ';
 									return str;
 								} else {
 									var str = '<a href="';
@@ -177,6 +178,20 @@ $adminTable
 			]
 
 		});
+
+
+/*Cartline updating*/
+
+$('button[name="refreshButton"]').click(function(){
+	var cartLineId = $(this).attr('value');
+	var currentQuantity = $('#count_'+cartLineId).val();
+	
+	var updateUrl = window.contextRoot + "/cart/update/cartline/"+cartLineId+"?quantity="+currentQuantity;
+	window.location.href = updateUrl;
+	
+	
+})
+
 
 /* Category validation using jquery validate */
 

@@ -19,8 +19,8 @@ public class Cart {
 	private int accountId;
 */
 	
-	@Column(name = "grand_total")
-	private double grandTotal;
+	@Column(name = "total_cost")
+	private double total;
 	
 	@Column(name = "cart_lines")
 	private int cartLines;
@@ -45,12 +45,12 @@ public class Cart {
 		this.id = id;
 	}
 
-	public double getGrandTotal() {
-		return grandTotal;
+	public double getTotal() {
+		return total;
 	}
 
-	public void setGrandTotal(double grandTotal) {
-		this.grandTotal = grandTotal;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	public int getCartLines() {

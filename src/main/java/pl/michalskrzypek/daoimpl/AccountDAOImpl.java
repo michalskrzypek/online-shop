@@ -6,6 +6,9 @@ import javax.persistence.Query;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +24,13 @@ public class AccountDAOImpl implements AccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Autowired
+	@Qualifier(value="passwordEncoder")
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	public boolean addAccount(Account account) {
 		try {
+			account.setPassword(passwordEncoder.encode(account.getPassword()));
 			sessionFactory.getCurrentSession().persist(account);
 			return true;
 		} catch (Exception e) {
@@ -166,21 +174,6 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 
 	}*/
-
-	public boolean updateCart(Cart cart) {
-		try {
-			sessionFactory.getCurrentSession().update(cart);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public Cart getCart(int accountId) {
-		String dbQuery = "FROM Cart where accountId = :accountId";
-		return sessionFactory.getCurrentSession().createQuery(dbQuery, Cart.class).setParameter("accountId", accountId).getSingleResult();
-	}
 
 
 

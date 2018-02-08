@@ -71,6 +71,12 @@
 							</div>
 						</c:if>
 						
+						<%-- <c:if test="${not empty message}">
+							<div class="alert alert-info">
+								<strong>${message }</strong>
+							</div>
+						</c:if> --%>
+						
 						<c:if test="${param.success == 'logout'}">
 							<div class="alert alert-info">
 								<strong>You have been logged out successfully!</strong>
@@ -113,6 +119,11 @@
 			<c:if test="${userClickedManageProduct == true }">
 				<%@include file="productManagement.jsp"%>
 			</c:if>
+			
+			<c:if test="${userClickedShowCart == true }">
+				<%@include file="cart.jsp"%>
+			</c:if>
+			
 
 		</div>
 		<!-- Footer -->

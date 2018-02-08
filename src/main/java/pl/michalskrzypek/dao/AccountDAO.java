@@ -39,13 +39,7 @@ public interface AccountDAO {
 	public List<Address> getShippingAddresses(int accountId);
 	
 	
-	//Cart management
-	//I Excluded addCart method because new cart is attached to account everytime account is created
-/*	public boolean addCart(Cart cart);
-	*/
-	public boolean updateCart(Cart cart);
-	
-	public Cart getCart(int accountId);
+
 	
 
 	
