@@ -42,8 +42,10 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/show/**").permitAll()
-				.antMatchers("/manage/**").hasAnyAuthority("ADMIN", "MANAGER").antMatchers("/cart/**").hasAuthority("CUSTOMER").and().formLogin().loginPage("/login")
-				.loginProcessingUrl("/authenticate").successForwardUrl("/home?success=login").and().logout().permitAll()
+				.antMatchers("/manage/**").hasAnyAuthority("ADMIN", "MANAGER").antMatchers("/cart/**")
+				.hasAuthority("CUSTOMER").antMatchers("/profile/**").hasAnyAuthority("ADMIN", "MANAGER", "CUSTOMER").antMatchers("/checkout/**").hasAuthority("CUSTOMER")
+				.and().formLogin().loginPage("/login").loginProcessingUrl("/authenticate")
+				./* successForwardUrl("/home?success=login"). */and().logout().permitAll()
 				.logoutSuccessUrl("/home?success=logout").and().exceptionHandling().accessDeniedPage("/access-denied");
 	}
 }

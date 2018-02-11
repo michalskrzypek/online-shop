@@ -7,36 +7,63 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-/*	@ManyToOne
-	Account account;
-	
-	public Account getAccount() {
-		return account;
-	}
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}*/
-	
+	/*
+	 * @ManyToOne Account account;
+	 * 
+	 * public Account getAccount() { return account; }
+	 * 
+	 * public void setAccount(Account account) { this.account = account; }
+	 */
+
 	@Column(name = "account_id")
 	private int accountId;
 
+	@Column(name = "first_name")
+	@NotBlank
+	private String firstName;
+	
+	@Column(name = "last_name")
+	@NotBlank
+	private String lastName;
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	@NotBlank
 	private String street;
 	
+	@NotBlank
 	private String city;
 	
+	@NotBlank
 	private String country;
 	
+	@NotBlank
 	@Column(name = "postal_code")
 	private String postalCode;
-	
+
 	@Column(name = "is_billing")
 	private boolean isBilling;
 
@@ -83,22 +110,22 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
-	public boolean isBilling() {
+	public boolean getIsBilling() {
 		return isBilling;
 	}
 
-	public void setBilling(boolean isBilling) {
+	public void setIsBilling(boolean isBilling) {
 		this.isBilling = isBilling;
 	}
 
-	public boolean isShipping() {
+	public boolean getIsShipping() {
 		return isShipping;
 	}
 
-	public void setShipping(boolean isShipping) {
+	public void setIsShipping(boolean isShipping) {
 		this.isShipping = isShipping;
 	}
-	
+
 	public int getAccountId() {
 		return accountId;
 	}
@@ -106,5 +133,5 @@ public class Address {
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
-	
+
 }

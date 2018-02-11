@@ -18,6 +18,8 @@ public interface ProductDAO {
 
 	public Product get(int id);
 	
+	public List<Product> getAllActiveSortedByViews();
+	
 	public List<Product> listActiveProducts();
 	
 	public List<Product> listActiveProductsByCategory(int categoryId);

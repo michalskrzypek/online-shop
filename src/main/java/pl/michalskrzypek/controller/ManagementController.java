@@ -168,11 +168,6 @@ public class ManagementController {
 
 	}
 
-	@ModelAttribute("categories")
-	public List<Category> getCategories() {
-		return categoryDAO.listActive();
-	}
-
 	@ModelAttribute("category")
 	public Category getCategory() {
 		Category newCategory = new Category();

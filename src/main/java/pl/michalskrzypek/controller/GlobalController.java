@@ -1,5 +1,7 @@
 package pl.michalskrzypek.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import pl.michalskrzypek.dao.AccountDAO;
+import pl.michalskrzypek.dao.AddressDAO;
+import pl.michalskrzypek.dao.CartLineDAO;
+import pl.michalskrzypek.dao.CategoryDAO;
+import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Account;
+import pl.michalskrzypek.entity.CartLine;
+import pl.michalskrzypek.entity.Category;
+import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.model.AccountModel;
+import pl.michalskrzypek.model.CheckoutModel;
+import pl.michalskrzypek.service.ProductService;
 
 @ControllerAdvice
 public class GlobalController {
@@ -22,6 +33,21 @@ public class GlobalController {
 	
 	@Autowired
 	AccountDAO accountDAO;
+	
+	@Autowired
+	AddressDAO addressDAO;
+
+	@Autowired
+	CategoryDAO categoryDAO;
+	
+	@Autowired
+	ProductDAO productDAO;
+	
+	@Autowired
+	CartLineDAO cartLineDAO;
+	
+	@Autowired
+	ProductService productService;
 	
 	@ModelAttribute("accountModel")
 	public AccountModel getAccountModel() {
@@ -53,5 +79,49 @@ public class GlobalController {
 		
 		return (AccountModel) session.getAttribute("accountModel");
 		
+	}
+	
+	@ModelAttribute("checkoutModel")
+	public CheckoutModel getCheckoutModel() {
+		 
+		if(session.getAttribute("checkoutModel") == null) {
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			
+			account = accountDAO.get(authentication.getName());
+			
+			if(account != null) {
+				CheckoutModel model = new CheckoutModel();
+				model.setAccount(account);
+				model.setCart(account.getCart());
+				List<CartLine> cartLines = cartLineDAO.listAll(account.getCart().getId());
+				model.setCartLines(cartLines);
+				model.setCheckoutTotal(account.getCart().getTotal());
+				model.setShipping(addressDAO.getShippingAddresses(account.getId()).get(0));
+				session.setAttribute("checkoutModel", model);
+
+				return model;
+			}
+			
+			
+		}
+		
+		return (CheckoutModel) session.getAttribute("checkoutModel");
+		
+	}
+	
+	@ModelAttribute("categories")
+	public List<Category> getCategories() {
+		return categoryDAO.listActive();
+	}
+	
+	@ModelAttribute("products")
+	public List<Product> getProducts() {
+		return productDAO.listActiveProducts();
+	}
+	
+	@ModelAttribute("productsSortedByViews")
+	public List<Product> getSortedProducts(){
+		return productDAO.getAllActiveSortedByViews();
 	}
 }

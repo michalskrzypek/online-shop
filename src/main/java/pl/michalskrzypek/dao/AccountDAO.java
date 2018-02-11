@@ -20,23 +20,14 @@ public interface AccountDAO {
 	
 	public Account getActive(String email);
 	
+	public boolean findByEmail(String email);
+	
 	public boolean delete(Account account);
 	
 	public boolean update(Account account);
 	
 	
-	//Addresses management
-	public boolean addAddress(Address address);
-	
-//	public Address getBillingAddress(Account account);
-	public Address getBillingAddress(int accountId);
-	
-	public boolean updateBillingAddress(Address address);
-	
-	public boolean deleteAddress(Address address);
-	
-//	public List<Address> getShippingAddresses(Account account);
-	public List<Address> getShippingAddresses(int accountId);
+
 	
 	
 

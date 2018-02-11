@@ -46,6 +46,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Custom styles for this template -->
 <link href="${css}/myApp.css" rel="stylesheet">
+<!--  -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -123,6 +125,15 @@
 			<c:if test="${userClickedShowCart == true }">
 				<%@include file="cart.jsp"%>
 			</c:if>
+			
+			<c:if test="${userClickedProfile == true }">
+					<%@include file="profile.jsp"%>
+					</c:if>
+			<c:if test="${userClickedAddAddress == true }">
+					<%@include file="addAddress.jsp"%>
+					</c:if>
+							
+					
 			
 
 		</div>

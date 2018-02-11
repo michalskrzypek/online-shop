@@ -1,7 +1,7 @@
 
 <div class="row">
 	<c:if test="${products.size() <=6 }">
-		<c:forEach items="${products }" var="product">
+		<c:forEach items="${productsSortedByViews }" var="product">
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/show/product/${product.getId()}"><img class="card-img-top"
@@ -26,7 +26,7 @@
 
 
 	<c:if test="${products.size() > 6 }">
-		<c:forEach begin="0" end="5" items="${products }" var="product">
+		<c:forEach begin="0" end="5" items="${productsSortedByViews }" var="product">
 
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">

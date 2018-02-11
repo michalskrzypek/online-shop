@@ -80,11 +80,11 @@ public class CartLineDAOImpl implements CartLineDAO {
 		return query.getResultList();
 	}
 
-	public CartLine get(int cartId, int productId) {
-		String cartLines= "from CartLine where cartId = :cartId and productId= :productId";
+	public CartLine get(int cartId, Product product) {
+		String cartLines= "from CartLine where cartId = :cartId and product= :product";
 		Query query = sessionFactory.getCurrentSession().createQuery(cartLines);
 		query.setParameter("cartId", cartId);
-		query.setParameter("productId", productId);
+		query.setParameter("product", product);
 		
 		return (CartLine)query.getSingleResult();
 	}

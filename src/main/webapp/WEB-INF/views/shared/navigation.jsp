@@ -57,7 +57,13 @@
 							<li role="separator" class="divider"></li>
 
 </security:authorize>
-
+<li><sf:form method="post"
+									action="${pageContext.request.contextPath }/profile/show">
+									<button type="submit" class="btn btn-default"
+										style="background-color: transparent; color: black; border: none;">
+										<span class="glyphicon glyphicon-user"></span> Your profile
+									</button>
+								</sf:form></li>
 							<li><sf:form method="post"
 									action="${pageContext.request.contextPath }/logout">
 									<button type="submit" class="btn btn-default"

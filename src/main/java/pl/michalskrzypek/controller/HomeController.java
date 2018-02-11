@@ -3,6 +3,8 @@ package pl.michalskrzypek.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.dao.CategoryDAO;
 import pl.michalskrzypek.dao.ProductDAO;
+import pl.michalskrzypek.entity.Account;
+import pl.michalskrzypek.entity.Address;
 import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.exception.ProductNotFoundException;
+import pl.michalskrzypek.service.ProductService;
 
 @Controller
 public class HomeController {
@@ -24,6 +30,10 @@ public class HomeController {
 
 	@Autowired
 	ProductDAO productDAO;
+	
+	@Autowired
+	ProductService productService;
+
 
 	@RequestMapping({ "/", "/home" })
 	public ModelAndView home() {
@@ -63,6 +73,9 @@ public class HomeController {
 		mv.addObject("title", product.getName());
 		mv.addObject("product", product);
 		mv.addObject("category", category);
+		
+		productService.addView(product);
+		
 		return mv;
 	}
 
@@ -94,15 +107,5 @@ public class HomeController {
 		mv.addObject("errorDesc", "You do not have authority to see this page.");
 		return mv;
 	}
-
-	@ModelAttribute("products")
-	public List<Product> getProducts() {
-		return productDAO.listActiveProducts();
-	}
-
-	@ModelAttribute("categories")
-	public List<Category> getCategories() {
-		return categoryDAO.listActive();
-	}
-
+	
 }

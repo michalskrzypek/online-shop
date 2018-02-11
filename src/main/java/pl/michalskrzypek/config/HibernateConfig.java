@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-	// Change the below based on the DBMS you choose
 	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
 	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/onlineshop";
 	private final static String DATABASE_USERNAME = "skrzyppp";
@@ -56,7 +55,7 @@ public class HibernateConfig {
 		return sessionFactory;
 	}
 
-	// Return Hibernate properties such as dialect, whether to show sql query that
+	// Returns Hibernate properties such as dialect, whether to show sql query that
 	// has been used, whether to show this query in a sql format etc.
 	private Properties getHibernateProperties() {
 

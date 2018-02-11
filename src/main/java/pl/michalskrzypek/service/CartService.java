@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import pl.michalskrzypek.dao.AccountDAO;
@@ -23,6 +25,9 @@ public class CartService {
 
 	@Autowired
 	private CartDAO cartDAO;
+	
+	@Autowired
+	private AccountDAO accountDAO;
 	
 	@Autowired
 	HttpSession session;
@@ -74,6 +79,21 @@ public class CartService {
 		
 		cart.setTotal(this.countTotal());
 		cartDAO.updateCart(cart);
+		
+	}
+	
+	public boolean checkProductInCartLine(Product product) {
+
+		 AccountModel model = (AccountModel) session.getAttribute("accountModel");
+		 try {
+		if(cartLineDAO.get(model.getCart().getId(), product) != null) {
+			return true;
+		}else {
+			return false;
+		}}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 	

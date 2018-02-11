@@ -115,4 +115,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return query.getResultList();*/
 	}
 
+	public List<Product> getAllActiveSortedByViews() {
+
+		String dbQuery = "from Product p order by p.views DESC";
+		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
+		return query.getResultList();
+	}
+
 }

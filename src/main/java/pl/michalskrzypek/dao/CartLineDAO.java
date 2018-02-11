@@ -4,6 +4,7 @@ import java.util.List;
 
 import pl.michalskrzypek.entity.Cart;
 import pl.michalskrzypek.entity.CartLine;
+import pl.michalskrzypek.entity.Product;
 
 public interface CartLineDAO {
 
@@ -19,5 +20,5 @@ public interface CartLineDAO {
 
 	public List<CartLine> listAvailable(int cartId);
 
-	public CartLine get(int cartId, int productId);
+	public CartLine get(int cartId, Product product);
 }

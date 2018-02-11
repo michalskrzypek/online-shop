@@ -25,9 +25,9 @@ public class AccountDAOImpl implements AccountDAO {
 	private SessionFactory sessionFactory;
 
 	@Autowired
-	@Qualifier(value="passwordEncoder")
+	@Qualifier(value = "passwordEncoder")
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	public boolean addAccount(Account account) {
 		try {
 			account.setPassword(passwordEncoder.encode(account.getPassword()));
@@ -38,7 +38,7 @@ public class AccountDAOImpl implements AccountDAO {
 			return false;
 		}
 	}
-	
+
 	public boolean update(Account account) {
 		try {
 			sessionFactory.getCurrentSession().update(account);
@@ -49,6 +49,18 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 	}
 	
+	public boolean findByEmail(String email) {
+		String dbQuery = "from Account where email = :email";
+		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
+		query.setParameter("email", email);
+		Account account = (Account) query.getSingleResult();
+		if (account == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public Account get(String email) {
 		// TODO Auto-generated method stub
 		String selectQuery = "FROM Account WHERE email = :email";
@@ -61,7 +73,7 @@ public class AccountDAOImpl implements AccountDAO {
 			return null;
 		}
 	}
-	
+
 	public Account get(int id) {
 		String selectQuery = "FROM Account WHERE id = :id";
 		try {
@@ -73,12 +85,12 @@ public class AccountDAOImpl implements AccountDAO {
 			return null;
 		}
 	}
-	
+
 	public Account getActive(int id) {
 		String selectQuery = "FROM Account WHERE id = :id and active = :active";
 		try {
-			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class).setParameter("id", id).setParameter("active",true)
-					.getSingleResult();
+			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class).setParameter("id", id)
+					.setParameter("active", true).getSingleResult();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,15 +102,13 @@ public class AccountDAOImpl implements AccountDAO {
 		String selectQuery = "FROM Account WHERE email = :email and active = :active";
 		try {
 			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class)
-					.setParameter("email", email).setParameter("active",true).getSingleResult();
+					.setParameter("email", email).setParameter("active", true).getSingleResult();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-
-
 
 	public boolean delete(Account account) {
 		try {
@@ -109,84 +119,8 @@ public class AccountDAOImpl implements AccountDAO {
 			return false;
 		}
 	}
-	
-	//Addresses management
-
-	public boolean addAddress(Address address) {
-		try {
-			sessionFactory.getCurrentSession().persist(address);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	public Address getBillingAddress(int accountId) {
-		String dbQuery = "FROM Address WHERE accountId = :accountId and isBilling = :isBilling";
-		return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class).setParameter("accountId", accountId)
-				.setParameter("isBilling", true).getSingleResult();
-	}
-
-	public boolean updateBillingAddress(Address address) {
-
-		try {
-			if (address.isBilling()) {
-				sessionFactory.getCurrentSession().update(address);
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-	}
-	
-	public boolean deleteAddress(Address address) {
-		try {
-		sessionFactory.getCurrentSession().delete(address);
-		return true;
-		}catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-
-	public List<Address> getShippingAddresses(int accountId) {
-		String dbQuery = "FROM Address WHERE accountId = :accountId and isShipping = :isShipping";
-		return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class).setParameter("accountId", accountId)
-				.setParameter("isShipping", true).getResultList();
-	}
-
-	
-	//Cart management
-
-/*	public boolean addCart(Cart cart) {
-		try {
-			sessionFactory.getCurrentSession().persist(cart);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-	}*/
 
 
 
-
-
-	/*
-	 * public boolean updateShippingAddress(Address address) {
-	 * 
-	 * try { if (address.isShipping()) {
-	 * sessionFactory.getCurrentSession().update(address); return true; } else {
-	 * return false; } } catch (Exception e) { e.printStackTrace(); return false; }
-	 * 
-	 * }
-	 */
 
 }

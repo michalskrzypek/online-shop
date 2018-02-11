@@ -34,6 +34,8 @@ CREATE TABLE product (
 CREATE TABLE address (
 	id int primary key auto_increment,
 	account_id int,
+	first_name VARCHAR(30),
+	last_name VARCHAR(30),
 	street VARCHAR(100),
 	city VARCHAR(30),
 	country VARCHAR(20),
@@ -92,6 +94,7 @@ id int primary key auto_increment,
 	CONSTRAINT fk_order_item_product_id FOREIGN KEY (product_id) REFERENCES product (id),
 	CONSTRAINT fk_order_item_order_id FOREIGN KEY (order_id) REFERENCES order_detail (id)
 );
+
 
 
 -- adding three categories

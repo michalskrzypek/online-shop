@@ -27,7 +27,7 @@ public class CartController {
 	CartLineDAO cartLineDAO;;
 
 	@RequestMapping("/show")
-	public ModelAndView showCart(@RequestParam(name = "success", required = false) String success, @RequestParam(name = "product", required = false) String prodName) {
+	public ModelAndView showCart(@RequestParam(name = "success", required = false) String success,@RequestParam(name = "error", required = false) String error, @RequestParam(name = "product", required = false) String prodName) {
 		ModelAndView mv = new ModelAndView("home");
 
 		mv.addObject("title", "Cart");
@@ -44,15 +44,26 @@ public class CartController {
 		}
 		
 		}
+		
+		if(error != null) {
+			if(error.equals("add")) {
+				mv.addObject("message", "Product: "+prodName+" has already been added to the cart.");	
+			}
+		}
 		return mv;
 	}
 
 	@RequestMapping("/add/product/{id}")
 	public String addCartLine(@PathVariable("id") int id) {
 		Product product = productDAO.get(id);
-		cartService.addCartLine(product);
-
-		return "redirect:/cart/show?success=add&product="+product.getName();
+		
+		if(cartService.checkProductInCartLine(product)) {
+			return "redirect:/cart/show?error=add&product="+product.getName();
+		}else {
+			cartService.addCartLine(product);
+			return "redirect:/cart/show?success=add&product="+product.getName();
+		}
+		
 	}
 
 	@RequestMapping("/delete/cartline/{id}")

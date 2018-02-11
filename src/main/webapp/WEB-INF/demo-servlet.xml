@@ -20,6 +20,8 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
+    <bean id="commonMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

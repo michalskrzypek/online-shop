@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
@@ -51,13 +51,24 @@
 		<!-- Page Content -->
 		<div class="content">
 			<div class="container">
+
+				<c:if test="${not empty message }">
+					<div class="row">
+					<div class="col-xs-offset-2 col-xs-4 alert alert-danger" style="margin: auto">
+					${message }
+					</div>
+					</div>
+				</c:if>
 				<div class="row">
-				<c:if test="${action == 'signup' }">
-					<%@include file="signup.jsp"%>
+
+					<c:if test="${action == 'signup' }">
+						<%@include file="signup.jsp"%>
 					</c:if>
 					<c:if test="${action == 'login' }">
-					<%@include file="login.jsp"%>
+						<%@include file="login.jsp"%>
 					</c:if>
+
+
 				</div>
 			</div>
 		</div>

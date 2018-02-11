@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.AccountDAO;
@@ -21,8 +22,11 @@ public class UserAccessController {
 	AccountDAO accountDAO;
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView goSignUp() {
+	public ModelAndView goSignUp(@RequestParam(name = "error", required = false) String param) {
 		ModelAndView mv = new ModelAndView("access");
+		if(param !=null) {
+			mv.addObject("message", "Account with this email already exists.");
+		}
 		mv.addObject("title", "Sign Up");
 		mv.addObject("action", "signup");
 		Account account = new Account();
@@ -34,15 +38,22 @@ public class UserAccessController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signUp(@Valid @ModelAttribute("account") Account account, BindingResult results, Model model) {
 
-		model.addAttribute("action", "signup");
-
+		
 		if (!results.hasErrors()) {
-			accountDAO.addAccount(account);
-			return "redirect:/home?success=register";
-		}
-
+			if(accountDAO.findByEmail(account.getEmail())) {
+				model.addAttribute("account",account);
+				return "redirect:/signup?error=account_taken";
+			}else {
+				accountDAO.addAccount(account);
+				return "redirect:/home?success=register";
+			
+			}
+		}else {
+			model.addAttribute("title", "Sign Up");
+			model.addAttribute("action", "signup");
+			model.addAttribute("account",account);
 		return "access";
-	}
+	}}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView goLogin() {
