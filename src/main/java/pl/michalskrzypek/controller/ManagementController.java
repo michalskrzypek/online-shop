@@ -23,7 +23,11 @@ import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.utility.FileUploadUtility;
-
+/**
+ * 
+ * @author Michal Skrzypek
+ *ManagementController is responsible for managing products and categories (adding, updating, deleting)
+ */
 @Controller
 @RequestMapping("/manage")
 @SessionAttributes("product")

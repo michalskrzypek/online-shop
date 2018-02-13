@@ -23,7 +23,7 @@ public class HibernateConfig {
 	private final static String DATABASE_USERNAME = "skrzyppp";
 	private final static String DATABASE_PASSWORD = "lebron23";
 
-	// Hibernate needs it to distinguish what syntax to use for specific database.
+	// Hibernate needs to distinguish what syntax(dialect) to use for specific database.
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 
 	@Bean(name = "dataSource")
@@ -65,7 +65,7 @@ public class HibernateConfig {
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
 
-		properties.put("hibernate.hbm2ddl.auto", "update");
+/*		properties.put("hibernate.hbm2ddl.auto", "update");*/
 
 		return properties;
 	}

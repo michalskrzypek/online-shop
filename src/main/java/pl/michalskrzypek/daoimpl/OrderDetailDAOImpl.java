@@ -74,11 +74,29 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
 	}
 
 	public List<OrderItem> listAllItems(int orderId) {
+		try {
 		String dbQuery = "from OrderItem where orderId = :id";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
 		query.setParameter("id", orderId);
 		return query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<OrderDetail> listAllOrders(int accountId) {
+		try {
+			String dbQuery = "from OrderDetail where accountId = :id";
+			Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
+			query.setParameter("id", accountId);
+			return query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }

@@ -18,12 +18,12 @@ public class CartLineDAOImpl implements CartLineDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	public CartLine get(int id) {
-		try{
+		try {
 			CartLine cartLine = sessionFactory.getCurrentSession().get(CartLine.class, Integer.valueOf(id));
 			return cartLine;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -64,29 +64,43 @@ public class CartLineDAOImpl implements CartLineDAO {
 	}
 
 	public List<CartLine> listAll(int cartId) {
-		String cartLines= "from CartLine where cartId = :cartId";
-		Query query = sessionFactory.getCurrentSession().createQuery(cartLines);
-		query.setParameter("cartId", cartId);
-		
-		return query.getResultList();
+		try {
+			String cartLines = "from CartLine where cartId = :cartId";
+			Query query = sessionFactory.getCurrentSession().createQuery(cartLines);
+			query.setParameter("cartId", cartId);
+
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public List<CartLine> listAvailable(int cartId) {
-		String cartLines= "from CartLine where cartId = :cartId and isAvailable = :isAvailable";
+		try{String cartLines = "from CartLine where cartId = :cartId and isAvailable = :isAvailable";
 		Query query = sessionFactory.getCurrentSession().createQuery(cartLines);
 		query.setParameter("cartId", cartId);
 		query.setParameter("isAvailable", true);
-		
+
 		return query.getResultList();
+	} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+	}
 	}
 
 	public CartLine get(int cartId, Product product) {
-		String cartLines= "from CartLine where cartId = :cartId and product= :product";
+		
+		try{String cartLines = "from CartLine where cartId = :cartId and product= :product";
 		Query query = sessionFactory.getCurrentSession().createQuery(cartLines);
 		query.setParameter("cartId", cartId);
 		query.setParameter("product", product);
-		
-		return (CartLine)query.getSingleResult();
+
+		return (CartLine) query.getSingleResult();
+	} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+	}
 	}
 
 }

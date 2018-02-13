@@ -1,5 +1,9 @@
+			<div class="page-header">
+				<h3><i>Most viewed products</i></h3>
+			</div>
 
 <div class="row">
+
 	<c:if test="${products.size() <=6 }">
 		<c:forEach items="${productsSortedByViews }" var="product">
 			<div class="col-lg-4 col-md-6 mb-4">
@@ -9,10 +13,10 @@
 						alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/show/product/${product.getId()}">${product.getName()}</a>
+							<a href="${pageContext.request.contextPath }/show/product/${product.getId()}"><i>${product.getBrand()}</i> ${product.getName()}</a>
 						</h4>
 						<h5>$${product.getUnitPrice() }</h5>
-						<p class="card-text">${product.getDescription() }</p>
+
 					</div>
 					<div class="card-footer">
 						<small class="text-muted">&#9733; &#9733; &#9733; &#9733;
@@ -35,10 +39,10 @@
 						alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/show/product/${product.getId()}">${product.getName()}</a>
+							<a href="${pageContext.request.contextPath }/show/product/${product.getId()}"><i>${product.getBrand()}</i> ${product.getName()}</a>
 						</h4>
 						<h5>$${product.getUnitPrice() }</h5>
-						<p class="card-text">${product.getDescription() }</p>
+						
 					</div>
 					<div class="card-footer">
 						<small class="text-muted">&#9733; &#9733; &#9733; &#9733;

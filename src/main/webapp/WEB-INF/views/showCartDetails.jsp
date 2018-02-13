@@ -70,7 +70,6 @@
 								</div>
 								<div class="col-sm-10">
 									<h4 class="nomargin">${cartline.getProduct().getName() }</h4>
-									<p>${cartline.getProduct().getDescription() }</p>
 								</div>
 							</div>
 						</td>

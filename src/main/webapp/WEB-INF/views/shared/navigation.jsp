@@ -21,9 +21,9 @@
 				<security:authorize
 					access="hasAuthority('MANAGER') and isAuthenticated()">
 
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/manage/products">Product
-							Management</a></li>
+					<li class="nav-item"><a class="nav-link" style="text-shadow:1px 1px 1px red;"
+						href="${pageContext.request.contextPath}/manage/products">! Product
+							Management !</a></li>
 
 				</security:authorize>
 			</ul>
@@ -56,7 +56,7 @@
 									</a></li>
 							<li role="separator" class="divider"></li>
 
-</security:authorize>
+
 <li><sf:form method="post"
 									action="${pageContext.request.contextPath }/profile/show">
 									<button type="submit" class="btn btn-default"
@@ -64,6 +64,7 @@
 										<span class="glyphicon glyphicon-user"></span> Your profile
 									</button>
 								</sf:form></li>
+								</security:authorize>
 							<li><sf:form method="post"
 									action="${pageContext.request.contextPath }/logout">
 									<button type="submit" class="btn btn-default"

@@ -95,9 +95,11 @@ public class GlobalController {
 				model.setAccount(account);
 				model.setCart(account.getCart());
 				List<CartLine> cartLines = cartLineDAO.listAll(account.getCart().getId());
+				if(cartLines != null) {
 				model.setCartLines(cartLines);
+				}
 				model.setCheckoutTotal(account.getCart().getTotal());
-				model.setShipping(addressDAO.getShippingAddresses(account.getId()).get(0));
+
 				session.setAttribute("checkoutModel", model);
 
 				return model;

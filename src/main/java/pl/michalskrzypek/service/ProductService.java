@@ -20,4 +20,11 @@ public class ProductService {
 		product.setViews(product.getViews()+1);
 		productDAO.update(product);
 	}
+	
+	public void addPurchase(Product product, int numberOfPurchases) {
+		product.setPurchases(product.getPurchases()+numberOfPurchases);
+		product.setQuantity(product.getQuantity() - numberOfPurchases);
+		productDAO.update(product);
+	}
+
 }

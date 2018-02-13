@@ -24,10 +24,10 @@
 <meta name="description"
 	content="OnlineShop is my first spring and hibernate project.">
 <meta name="author" content="Michal Skrzypek">
-   <meta name="_csrf_parameter" content="_csrf" />
-        <meta name="_csrf_header" content="X-CSRF-TOKEN" />
-        <meta name="_csrf" content="e62835df-f1a0-49ea-bce7-bf96f998119c" />
-  
+<meta name="_csrf_parameter" content="_csrf" />
+<meta name="_csrf_header" content="X-CSRF-TOKEN" />
+<meta name="_csrf" content="e62835df-f1a0-49ea-bce7-bf96f998119c" />
+
 <title>${title}|OnlineShop</title>
 
 <script>
@@ -47,7 +47,9 @@
 <!-- Custom styles for this template -->
 <link href="${css}/myApp.css" rel="stylesheet">
 <!--  -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 </head>
 
 <body>
@@ -72,25 +74,25 @@
 								<strong>You have been logged in successfully!</strong>
 							</div>
 						</c:if>
-						
+
 						<%-- <c:if test="${not empty message}">
 							<div class="alert alert-info">
 								<strong>${message }</strong>
 							</div>
 						</c:if> --%>
-						
+
 						<c:if test="${param.success == 'logout'}">
 							<div class="alert alert-info">
 								<strong>You have been logged out successfully!</strong>
 							</div>
 						</c:if>
-						
+
 						<c:if test="${param.success == 'register'}">
 							<div class="alert alert-success">
 								<strong>Account has been created successfully!</strong>
 							</div>
 						</c:if>
-						
+
 					</div>
 				</div>
 			</div>
@@ -121,20 +123,27 @@
 			<c:if test="${userClickedManageProduct == true }">
 				<%@include file="productManagement.jsp"%>
 			</c:if>
-			
+
 			<c:if test="${userClickedShowCart == true }">
 				<%@include file="cart.jsp"%>
 			</c:if>
-			
+
 			<c:if test="${userClickedProfile == true }">
-					<%@include file="profile.jsp"%>
-					</c:if>
+				<%@include file="profile.jsp"%>
+			</c:if>
 			<c:if test="${userClickedAddAddress == true }">
-					<%@include file="addAddress.jsp"%>
-					</c:if>
-							
-					
-			
+				<%@include file="addAddress.jsp"%>
+			</c:if>
+			<c:if test="${userClickedUpdateAddress == true }">
+				<%@include file="updateAddress.jsp"%>
+			</c:if>
+	<c:if test="${userClickedShowOrders== true }">
+				<%@include file="showOrders.jsp"%>
+			</c:if>
+
+
+
+
 
 		</div>
 		<!-- Footer -->
@@ -153,7 +162,7 @@
 
 	<!--  jquery code for category form validation-->
 	<script src="${js}/jquery.validate.js"></script>
-<%-- 	<script src="${js}/jquery.validate.min.js"></script> --%>
+	<%-- 	<script src="${js}/jquery.validate.min.js"></script> --%>
 	<!--  Some javascript code written by myself-->
 	<script src="${js}/myApp.js"></script>
 </body>

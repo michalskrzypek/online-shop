@@ -20,6 +20,7 @@ import pl.michalskrzypek.entity.Cart;
 import pl.michalskrzypek.entity.CartLine;
 import pl.michalskrzypek.entity.OrderDetail;
 import pl.michalskrzypek.entity.OrderItem;
+import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.model.AccountModel;
 import pl.michalskrzypek.model.CheckoutModel;
 
@@ -46,6 +47,9 @@ public class CheckoutService {
 	
 	@Autowired
 	CartDAO cartDAO;
+
+	@Autowired
+	ProductService productService;
 	
 	public void placeOrder(CheckoutModel model, List<CartLine> itemsList) {
 		
@@ -70,6 +74,8 @@ public class CheckoutService {
 			item.setTotal(line.getTotal());
 			orderItemDAO.add(item);
 			cartLineDAO.delete(line.getId());
+			
+			productService.addPurchase(item.getProduct(), item.getProductCount());
 		}
 		
 		Cart currentCart = model.getCart();

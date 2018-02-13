@@ -133,7 +133,7 @@
 							<h4 class="modal-title align-left">Add new category</h4>
 						</div>
 						<div class="modal-body">
-							<sf:form id="categoryForm" class=""
+							<sf:form id="categoryForm"
 								action="${pageContext.request.contextPath }/manage/category/add"
 								modelAttribute="category" method="POST">
 

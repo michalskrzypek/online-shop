@@ -34,6 +34,11 @@ public class HomeController {
 	@Autowired
 	ProductService productService;
 
+	@RequestMapping("/send")
+	public String email() {
+		return "sendEmail";
+	}
+	
 
 	@RequestMapping({ "/", "/home" })
 	public ModelAndView home() {

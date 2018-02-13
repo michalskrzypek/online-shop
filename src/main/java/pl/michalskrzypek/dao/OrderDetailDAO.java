@@ -17,5 +17,7 @@ public interface OrderDetailDAO {
 
 	public OrderDetail get(int id);
 	
+	public List<OrderDetail> listAllOrders(int accountId);
+	
 	public List<OrderItem> listAllItems(int orderId);
 }

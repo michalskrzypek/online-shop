@@ -50,9 +50,15 @@
 
 	</div>
 
+	<c:if test="${not empty message }">
+	<div class="alert alert-warning">
+							<strong>${message }</strong>
+						</div>
+						</c:if>
 
 
 	<div class="row">
+
 		<div class="col-xs-10 col-sm-6 col-md-6">
 			<div class="page-header">
 				<h2>Select shipping address</h2>
@@ -116,7 +122,7 @@
 				<div style="float: right;">
 
 					<button type="submit" class="btn btn-success btn-block">
-						Confirm & Pay <span class="glyphicon glyphicon-menu-right"></span>
+						Select address <span class="glyphicon glyphicon-menu-right"></span>
 					</button>
 
 
@@ -139,7 +145,7 @@
 						<div class="main-login main-center">
 
 							<sf:form method="post"
-								action="${pageContext.request.contextPath}/profile/add/address"
+								action="${pageContext.request.contextPath}/checkout/add/address"
 								modelAttribute="address">
 
 								<div class="form-group">
@@ -225,12 +231,14 @@
 
 								<sf:hidden path="id" />
 								<sf:hidden path="accountId" />
+								<sf:hidden path="isShipping" />
+								<sf:hidden path="isBilling" />
 
 
 								<div class="form-group ">
 									<input type="submit" id="button"
 										class="btn btn-primary btn-lg btn-block login-button"
-										value="Confirm" />
+										value="Add address" />
 								</div>
 
 							</sf:form>

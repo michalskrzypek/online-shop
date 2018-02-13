@@ -83,7 +83,7 @@
 
 
 								</fieldset>
-
+	<sf:hidden path="id" />
 
 								<div class="form-group ">
 									<input type="submit" id="button"

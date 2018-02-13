@@ -143,9 +143,9 @@
 							<tbody>
 
 								<tr>
-									<td data-th="First Name">${checkoutModel.getAccount().getFirstName() }</td>
+									<td data-th="First Name">${checkoutModel.getShipping().getFirstName() }</td>
 
-									<td data-th="Last Name">${checkoutModel.getAccount().getLastName() }</td>
+									<td data-th="Last Name">${checkoutModel.getShipping().getLastName() }</td>
 
 									<td data-th="Street">${checkoutModel.getShipping().getStreet() }</td>
 									<td data-th="City">

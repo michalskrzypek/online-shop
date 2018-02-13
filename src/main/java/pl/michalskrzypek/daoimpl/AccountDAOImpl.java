@@ -50,11 +50,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 	
 	public boolean findByEmail(String email) {
-		String dbQuery = "from Account where email = :email";
-		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery);
-		query.setParameter("email", email);
-		Account account = (Account) query.getSingleResult();
-		if (account == null) {
+		if (this.get(email) == null) {
 			return false;
 		} else {
 			return true;

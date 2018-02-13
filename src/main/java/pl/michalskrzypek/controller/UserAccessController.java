@@ -14,7 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.entity.Account;
-
+/**
+ * 
+ * @author Michal Skrzypek
+ *Controller responsible for registering new user
+ */
 @Controller
 public class UserAccessController {
 
@@ -38,7 +42,6 @@ public class UserAccessController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signUp(@Valid @ModelAttribute("account") Account account, BindingResult results, Model model) {
 
-		
 		if (!results.hasErrors()) {
 			if(accountDAO.findByEmail(account.getEmail())) {
 				model.addAttribute("account",account);
@@ -52,7 +55,7 @@ public class UserAccessController {
 			model.addAttribute("title", "Sign Up");
 			model.addAttribute("action", "signup");
 			model.addAttribute("account",account);
-		return "access";
+			return "access";
 	}}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

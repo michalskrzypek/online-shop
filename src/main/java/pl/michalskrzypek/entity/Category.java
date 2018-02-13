@@ -23,11 +23,9 @@ public class Category {
 	private int id;
 	
 	@NotBlank(message = "Please enter a category name!")
-	@Min(value = 2, message = "Minimum length is 2")
 	private String name;
 	
 	@NotBlank(message = "Please enter a category description!")
-	@Min(value = 5, message = "Minimum length is 5")
 	private String description;
 	
 	@Column(name = "image_url")
