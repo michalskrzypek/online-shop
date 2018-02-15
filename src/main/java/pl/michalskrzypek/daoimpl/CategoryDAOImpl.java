@@ -3,7 +3,6 @@ package pl.michalskrzypek.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

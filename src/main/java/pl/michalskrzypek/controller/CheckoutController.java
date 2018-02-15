@@ -12,13 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 
 import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.dao.AddressDAO;
@@ -28,9 +25,6 @@ import pl.michalskrzypek.dao.OrderItemDAO;
 import pl.michalskrzypek.entity.Account;
 import pl.michalskrzypek.entity.Address;
 import pl.michalskrzypek.entity.CartLine;
-import pl.michalskrzypek.entity.OrderDetail;
-import pl.michalskrzypek.entity.OrderItem;
-import pl.michalskrzypek.model.AccountModel;
 import pl.michalskrzypek.model.CheckoutModel;
 import pl.michalskrzypek.service.CheckoutService;
 

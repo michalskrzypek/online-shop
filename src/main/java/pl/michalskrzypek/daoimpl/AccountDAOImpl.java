@@ -48,7 +48,7 @@ public class AccountDAOImpl implements AccountDAO {
 			return false;
 		}
 	}
-	
+
 	public boolean findByEmail(String email) {
 		if (this.get(email) == null) {
 			return false;
@@ -115,8 +115,5 @@ public class AccountDAOImpl implements AccountDAO {
 			return false;
 		}
 	}
-
-
-
 
 }
