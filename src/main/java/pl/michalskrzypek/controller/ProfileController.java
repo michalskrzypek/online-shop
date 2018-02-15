@@ -131,13 +131,11 @@ public class ProfileController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Account currentUser = accountDAO.get(auth.getName());
 		if (!results.hasErrors()) {
-			if (address.getIsBilling()) {
-				address.setAccountId(currentUser.getId());
-				addressDAO.addAddress(address);
+			address.setAccountId(currentUser.getId());
+			addressDAO.addAddress(address);
+			if (address.isBilling()) {
 				return "redirect:/profile/show?success=billing_address";
 			} else {
-				address.setAccountId(currentUser.getId());
-				addressDAO.addAddress(address);
 				return "redirect:/profile/show?success=shipping_address";
 			}
 		} else {

@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.dao.CategoryDAO;
 import pl.michalskrzypek.dao.ProductDAO;
-import pl.michalskrzypek.entity.Account;
-import pl.michalskrzypek.entity.Address;
 import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.exception.ProductNotFoundException;
 import pl.michalskrzypek.service.ProductService;
+
+
 
 @Controller
 public class HomeController {
@@ -33,11 +32,6 @@ public class HomeController {
 	
 	@Autowired
 	ProductService productService;
-
-	@RequestMapping("/send")
-	public String email() {
-		return "sendEmail";
-	}
 	
 
 	@RequestMapping({ "/", "/home" })

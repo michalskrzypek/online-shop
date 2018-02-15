@@ -14,11 +14,19 @@
 		<li class="breadcrumb-item active">${product.getName() }</li>
 		</ol>
 </div>
+</div>
+<div class="row">
+<div class="page-header">
+  <h1>${product.getBrand()} ${product.getName()}</h1>
+   </div>
+   </div>
+   <div class="row">
 <div class="float-left" ><img src="${pageContext.request.contextPath }/resources/images/${product.getCode() }.jpg" class="img-fluid" alt="Responsive image"></div> 
 
 <div class="col-xs-9">
+
 		<div class="jumbotron">
-  <h1 class="display-3">${product.getName()}</h1>
+		
    <p class="lead">${product.getDescription()}</p>
   <hr class="my-2">
   <p>$${product.getUnitPrice()}</p>

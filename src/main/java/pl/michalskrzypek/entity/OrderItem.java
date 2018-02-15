@@ -8,8 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "order_item")
+@Getter
+@Setter
 public class OrderItem {
 
 	@Id
@@ -31,54 +36,4 @@ public class OrderItem {
 	@Column(name = "buying_price")
 	private double price;
 
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public int getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
-
-	public double getTotal() {
-		return totalPrice;
-	}
-
-	public void setTotal(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public int getProductCount() {
-		return productCount;
-	}
-
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
-	
-	
 }

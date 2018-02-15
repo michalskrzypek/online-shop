@@ -71,7 +71,7 @@ public class CheckoutService {
 			item.setPrice(line.getProductPrice());
 			item.setProduct(line.getProduct());
 			item.setProductCount(line.getProductCount());
-			item.setTotal(line.getTotal());
+			item.setTotalPrice(line.getTotal());
 			orderItemDAO.add(item);
 			cartLineDAO.delete(line.getId());
 			

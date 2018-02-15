@@ -139,8 +139,8 @@ public class CheckoutController {
 		if (!results.hasErrors()) {
 			CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 			address.setAccountId(model.getAccount().getId());
-			address.setIsShipping(true);
-			address.setIsBilling(false);
+			address.setShipping(true);
+			address.setBilling(false);
 			addressDAO.addAddress(address);
 			model.setShipping(address);
 			mv.addObject("title", "Confirm & Pay");

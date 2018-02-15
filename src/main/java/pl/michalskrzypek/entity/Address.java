@@ -9,7 +9,13 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Address {
 
 	@Id
@@ -34,22 +40,6 @@ public class Address {
 	@Column(name = "last_name")
 	@NotBlank
 	private String lastName;
-	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	@NotBlank
 	private String street;
@@ -69,69 +59,5 @@ public class Address {
 
 	@Column(name = "is_shipping")
 	private boolean isShipping;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public boolean getIsBilling() {
-		return isBilling;
-	}
-
-	public void setIsBilling(boolean isBilling) {
-		this.isBilling = isBilling;
-	}
-
-	public boolean getIsShipping() {
-		return isShipping;
-	}
-
-	public void setIsShipping(boolean isShipping) {
-		this.isShipping = isShipping;
-	}
-
-	public int getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
-	}
 
 }

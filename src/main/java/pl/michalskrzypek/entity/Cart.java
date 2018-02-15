@@ -10,7 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Cart implements Serializable{
 
 	/**
@@ -22,61 +27,18 @@ public class Cart implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-/*	@Column(name = "account_id")
-	private int accountId;
-*/
-	
+
 	@Column(name = "total_cost")
 	private double total;
 	
 	@Column(name = "cart_lines")
 	private int cartLines;
 
-	
 	@OneToOne
 	private Account account;
 	
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
-	}
-
-	public int getCartLines() {
-		return cartLines;
-	}
-
-	public void setCartLines(int cartLines) {
-		this.cartLines = cartLines;
-	}
-/*
-	public int getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
-	}
+	/*	@Column(name = "account_id")
+	private int accountId;
 */
-
-	
 	
 }

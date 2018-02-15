@@ -8,8 +8,9 @@
 						action="${pageContext.request.contextPath}/profile/update/address"
 						modelAttribute="address">
 
-<div class="form-group">
-							<label for="firstName" class="cols-sm-2 control-label">First Name</label>
+						<div class="form-group">
+							<label for="firstName" class="cols-sm-2 control-label">First
+								Name</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa"
@@ -21,7 +22,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="lastName" class="cols-sm-2 control-label">Last Name</label>
+							<label for="lastName" class="cols-sm-2 control-label">Last
+								Name</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa"
@@ -85,35 +87,10 @@
 							</div>
 						</div>
 
-						<fieldset class="form-group">
-							<div class="form-check">
-
-								<c:if test="${param.address == 'billing'}">
-									<label class="radio-inline"> <sf:radiobutton
-											path="isBilling"  value ="true" checked="checked" /> Billing Address
-									</label>
-									
-									<sf:hidden path="isShipping" value = "false" />
-								</c:if>
-								
-								<c:if test="${param.address == 'shipping'}">
-									<label class="radio-inline"><sf:radiobutton
-											path="isShipping" value ="true" checked="checked" /> Shipping Address</label>
-											<sf:hidden path="isBilling" value = "false" />
-								</c:if>
-
-
-
-							</div>
-
-
-
-						</fieldset>
 
 						<sf:hidden path="id" />
 						<sf:hidden path="accountId" />
-				<sf:hidden path="isBilling" value="true" />
-
+						<sf:hidden path="billing" value="true" />
 
 						<div class="form-group ">
 							<input type="submit" id="button"

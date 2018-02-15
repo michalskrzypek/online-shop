@@ -11,8 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "cart_line")
+@Getter
+@Setter
 public class CartLine implements Serializable{
 
 	/**
@@ -29,10 +34,10 @@ public class CartLine implements Serializable{
 	
 	private double total;
 	
-	
 /*	@Column(name = "product_id")
 	private int productId;
 	*/
+	
 	@OneToOne
 	Product product;
 
@@ -52,64 +57,5 @@ public class CartLine implements Serializable{
 	
 	@Column(name = "is_available")
 	private boolean isAvailable;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
-	}
-
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
-	}
-/*
-	public int getProductId() {
-		return productId;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
-*/
-	public int getProductCount() {
-		return productCount;
-	}
-
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
-	}
-
-	public double getProductPrice() {
-		return productPrice;
-	}
-
-	public void setProductPrice(double productPrice) {
-		this.productPrice = productPrice;
-	}
-
-	public boolean isAvailable() {
-		return isAvailable;
-	}
-
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
-	}
-	
-	
-	
 	
 }
