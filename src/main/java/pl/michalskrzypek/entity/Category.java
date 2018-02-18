@@ -1,5 +1,7 @@
 package pl.michalskrzypek.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Category {
+public class Category implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @Id Id is to indicate the primary key of the entity

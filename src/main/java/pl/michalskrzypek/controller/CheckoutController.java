@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.AccountDAO;
@@ -25,21 +26,19 @@ import pl.michalskrzypek.dao.OrderItemDAO;
 import pl.michalskrzypek.entity.Account;
 import pl.michalskrzypek.entity.Address;
 import pl.michalskrzypek.entity.CartLine;
+import pl.michalskrzypek.model.AccountModel;
 import pl.michalskrzypek.model.CheckoutModel;
 import pl.michalskrzypek.service.CheckoutService;
 
 /**
  * 
- * @author Michal Skrzypek
- *Controller manages checkout flow from the beginning to the end
+ * @author Michal Skrzypek Controller manages checkout flow from the beginning
+ *         to the end
  */
 
 @Controller
 @RequestMapping("/checkout")
 public class CheckoutController {
-
-	@Autowired
-	HttpSession session;
 
 	@Autowired
 	AccountDAO accountDAO;
@@ -58,16 +57,20 @@ public class CheckoutController {
 
 	@Autowired
 	CheckoutService checkoutService;
+	
+	@Autowired
+	HttpSession session;
+
 
 	@RequestMapping(value = "/cart_details", method = RequestMethod.GET)
 	public ModelAndView showCartDetails() {
 		ModelAndView mv = new ModelAndView("checkout");
 		mv.addObject("title", "Cart details");
 		mv.addObject("showCartDetails", true);
+
+		AccountModel model = (AccountModel) session.getAttribute("accountModel");
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Account account = accountDAO.get(authentication.getName());
-		List<CartLine> cartLines = cartLineDAO.listAll(account.getCart().getId());
+		List<CartLine> cartLines = cartLineDAO.listAll(model.getCart().getId());
 		mv.addObject("cartLines", cartLines);
 
 		return mv;
@@ -78,11 +81,11 @@ public class CheckoutController {
 		ModelAndView mv = new ModelAndView("checkout");
 		mv.addObject("title", "Select address");
 		mv.addObject("selectAddress", true);
-		
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Account account = accountDAO.get(authentication.getName());
 
+		//creating new CheckoutModel which will be needed in the next steps of checkout process
 		CheckoutModel model = new CheckoutModel();
 		model.setAccount(account);
 		model.setCart(account.getCart());
@@ -101,19 +104,17 @@ public class CheckoutController {
 	@RequestMapping(value = "/select_address", method = RequestMethod.POST)
 	public ModelAndView showDetails(@RequestParam(name = "address", required = false) String addressId) {
 		ModelAndView mv = new ModelAndView("checkout");
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Account account = accountDAO.get(authentication.getName());
+
+		CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 
 		if (addressId != null) {
 			int id = Integer.parseInt(addressId);
-
-			CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 			model.setShipping(addressDAO.getAddress(id));
 			mv.addObject("title", "Confirm & Pay");
 			mv.addObject("confirmAndPay", true);
 			return mv;
 		} else {
-			mv.addObject("shippingAddresses", addressDAO.getShippingAddresses(account.getId()));
+			mv.addObject("shippingAddresses", addressDAO.getShippingAddresses(model.getAccount().getId()));
 			mv.addObject("title", "Select address");
 			mv.addObject("selectAddress", true);
 			mv.addObject("message", "Select one address!");
@@ -128,10 +129,9 @@ public class CheckoutController {
 	public ModelAndView addNewShippingAddress(@Valid @ModelAttribute("address") Address address,
 			BindingResult results) {
 		ModelAndView mv = new ModelAndView("checkout");
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Account account = accountDAO.get(authentication.getName());
+		
+		CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 		if (!results.hasErrors()) {
-			CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 			address.setAccountId(model.getAccount().getId());
 			address.setShipping(true);
 			address.setBilling(false);
@@ -141,7 +141,7 @@ public class CheckoutController {
 			mv.addObject("confirmAndPay", true);
 			return mv;
 		} else {
-			mv.addObject("shippingAddresses", addressDAO.getShippingAddresses(account.getId()));
+			mv.addObject("shippingAddresses", addressDAO.getShippingAddresses(model.getAccount().getId()));
 			mv.addObject("title", "Select address");
 			mv.addObject("selectAddress", true);
 			mv.addObject("message", "Address validation failed!!");
@@ -159,20 +159,6 @@ public class CheckoutController {
 		mv.addObject("showReceipt", true);
 		mv.addObject("title", "Receipt");
 
-		CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
-		checkoutService.placeOrder(model, model.getCartLines());
-		mv.addObject("items", orderDetailDAO.listAllItems(model.getOrderDetail().getId()));
-		mv.addObject("shipping", addressDAO.getAddress(model.getOrderDetail().getShippingId()));
-
-		return mv;
-	}
-
-	@RequestMapping(value = "/receipt", method = RequestMethod.GET)
-	public ModelAndView showReceiptGet() {
-		ModelAndView mv = new ModelAndView("checkout");
-		mv.addObject("showReceipt", true);
-		mv.addObject("title", "Receipt");
-		
 		CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
 		checkoutService.placeOrder(model, model.getCartLines());
 		mv.addObject("items", orderDetailDAO.listAllItems(model.getOrderDetail().getId()));

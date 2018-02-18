@@ -2,7 +2,7 @@ package pl.michalskrzypek.daoimpl;
 
 import java.util.List;
 
-import javax.persistence.Query;
+/*import javax.persistence.Query;*/
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

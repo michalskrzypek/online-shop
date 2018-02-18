@@ -67,30 +67,30 @@
 
 				<div class="row">
 					<div class="col-xs-4">
-					
-					<c:if test="${showCartDetails  == true}">
-								<%@include file="showCartDetails.jsp" %>
+
+						<c:if test="${showCartDetails  == true}">
+							<%@include file="showCartDetails.jsp"%>
 						</c:if>
 
-					<c:if test="${selectAddress  == true}">
-								<%@include file="selectAddress.jsp" %>
+						<c:if test="${selectAddress  == true}">
+							<%@include file="selectAddress.jsp"%>
 						</c:if>
-				
+
 
 						<c:if test="${confirmAndPay  == true}">
-								<%@include file="confirmationAndPayment.jsp" %>
-						</c:if> 
-						
-							<c:if test="${showReceipt  == true}">
-								<%@include file="receipt.jsp" %>
-						</c:if> 
-						
-							
-						
+							<%@include file="confirmationAndPayment.jsp"%>
+						</c:if>
+
+						<c:if test="${showReceipt  == true}">
+							<%@include file="receipt.jsp"%>
+						</c:if>
 
 
 
-						
+
+
+
+
 
 
 					</div>

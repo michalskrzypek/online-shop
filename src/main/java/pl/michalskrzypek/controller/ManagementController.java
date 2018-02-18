@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.michalskrzypek.dao.CategoryDAO;
@@ -19,14 +18,14 @@ import pl.michalskrzypek.dao.ProductDAO;
 import pl.michalskrzypek.entity.Category;
 import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.utility.FileUploadUtility;
+
 /**
  * 
- * @author Michal Skrzypek
- *ManagementController is responsible for managing products and categories (adding, updating, deleting)
+ * @author Michal Skrzypek ManagementController is responsible for managing
+ *         products and categories (adding, updating, deleting)
  */
 @Controller
 @RequestMapping("/manage")
-@SessionAttributes("product")
 public class ManagementController {
 
 	@Autowired
@@ -92,7 +91,6 @@ public class ManagementController {
 				}
 
 				returnStatement = "redirect:/manage/products?success=addProduct&name=" + product.getName();
-
 			} else {
 				productDAO.update(product);
 
@@ -123,7 +121,7 @@ public class ManagementController {
 		boolean isActive = new Boolean(activity);
 		Product product = productDAO.get(id);
 		product.setActive(isActive);
-		
+
 		if (isActive) {
 			// for true
 			mv.addObject("message", "Product: <b>" + product.getName() + "</b> is active now!");

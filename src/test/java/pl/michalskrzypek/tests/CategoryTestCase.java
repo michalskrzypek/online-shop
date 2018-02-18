@@ -21,10 +21,6 @@ public class CategoryTestCase {
 	private Category category;
 
 	
-	private static ProductDAO productDAO;
-	
-	private Product product;
-	
 	@BeforeClass
 	public static void init() {
 
@@ -34,18 +30,34 @@ public class CategoryTestCase {
 
 		categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
 
-		productDAO = (ProductDAO) context.getBean("productDAO");
 	}
 	
+
 	@Test
-	public void getActiveProdByCat() {
-		category = categoryDAO.get(1);
-		assertEquals("Problem with counting active products by category", 1, productDAO.listActiveProductsByCategory(1).size());
+	public void CRUDtest() {
+
+		category = new Category();
+
+		category.setName("TEST");
+		category.setDescription("Category of TVs");
+		category.setActive(true);
+
+		//CREATING NEW CATEGORY
+		assertEquals("Adding category", true, categoryDAO.add(category));
+
+		//UPDATING CATEGORY
+		category.setDescription("Updated TEST category");
+		assertEquals("Updating category", true, categoryDAO.update(category));
+		
+		//READING CATEGORY
+		assertEquals("reading category", "Updated TEST category", categoryDAO.get(category.getId()).getDescription());
+
+		//DELETING CATEGORY
+		assertEquals("deleting category", true, categoryDAO.delete(category.getId()));
+		
 	}
 	
-	
-	
-/*
+	/*
 	  @Test public void testUpdateProduct() { product= productDAO.get(6);
 	  product.setName("UPDATED");
 	  assertEquals("updating a product", true,
@@ -53,37 +65,6 @@ public class CategoryTestCase {
 	  
 	  }*/
 	 
-
-/*	@Test
-	public void testCRUDOperation() {
-
-		category = new Category();
-
-		category.setName("Hoodies");
-		category.setDescription("Category of hoodies");
-		category.setActive(true);
-
-		// inserting new category
-		assertEquals("Adding category", true, categoryDAO.add(category));
-
-		// updating this category
-		category.setDescription("Updated category");
-		assertEquals("Updating category", true, categoryDAO.update(category));
-
-		category = new Category();
-		category.setName("T-shirts");
-		category.setActive(true);
-		category.setDescription("tshirts desc");
-		// inserting new category
-		assertEquals("Adding category", true, categoryDAO.add(category));
-		
-		//deleting category
-		assertEquals("Deleting category", true, categoryDAO.delete(4));
-		
-		//reading active categories
-		assertEquals("Listing active categories", 1, categoryDAO.listActive().size());
-
-	}*/
 
 	/*
 	 * @Test public void testAddCategory() {

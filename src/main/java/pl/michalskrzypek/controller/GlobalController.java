@@ -5,10 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import pl.michalskrzypek.dao.AccountDAO;
 import pl.michalskrzypek.dao.AddressDAO;
@@ -25,9 +28,6 @@ import pl.michalskrzypek.service.ProductService;
 
 @ControllerAdvice
 public class GlobalController {
-
-	@Autowired
-	HttpSession session;
 	
 	Account account;
 	
@@ -48,6 +48,9 @@ public class GlobalController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	HttpSession session;
 	
 	@ModelAttribute("accountModel")
 	public AccountModel getAccountModel() {

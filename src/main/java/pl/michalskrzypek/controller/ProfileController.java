@@ -28,11 +28,10 @@ import pl.michalskrzypek.entity.Product;
 import pl.michalskrzypek.model.AccountModel;
 import pl.michalskrzypek.utility.FileUploadUtility;
 
-
 /**
  * 
- * @author Michal SKrzypek
- *Controller responsible for displaying proper data in a profile page
+ * @author Michal SKrzypek Controller responsible for displaying proper data in
+ *         a profile page
  */
 @Controller
 @RequestMapping("/profile")
@@ -46,7 +45,7 @@ public class ProfileController {
 
 	@Autowired
 	AddressDAO addressDAO;
-	
+
 	@Autowired
 	OrderDetailDAO orderDetailDAO;
 
@@ -70,6 +69,8 @@ public class ProfileController {
 				mv.addObject("message", "Couldn't upload a photo...");
 			} else if (error.equals("updating_billing_address")) {
 				mv.addObject("message", "Couldn't update billing address...");
+			}else if(error.equals("adding_address")) {
+				mv.addObject("message", "Couldn't add the address...");
 			}
 		}
 
@@ -92,34 +93,30 @@ public class ProfileController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping("/show/orders")
 	public ModelAndView showOrders() {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("title", "Your orders");
 		mv.addObject("userClickedShowOrders", true);
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account account = accountDAO.get(auth.getName());
-		
-		List<OrderDetail> orders = orderDetailDAO.listAllOrders(account.getId());
-		if(orders != null) {
+
+		AccountModel model = (AccountModel) session.getAttribute("accountModel");
+
+		List<OrderDetail> orders = orderDetailDAO.listAllOrders(model.getId());
+		if (orders != null) {
 			mv.addObject("orders", orders);
 			mv.addObject("orderDAO", orderDetailDAO);
 		}
-		
+
 		return mv;
 	}
 
 	@RequestMapping(value = "/add/address", method = RequestMethod.GET)
 	public ModelAndView goAddAddress(@RequestParam(name = "address", required = true) String addressType) {
 		ModelAndView mv = new ModelAndView("home");
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account currentUser = accountDAO.get(auth.getName());
-
-		Address newAddress = new Address();
-		mv.addObject("title", "Address Management");
 		mv.addObject("userClickedAddAddress", true);
+		mv.addObject("title", "Add address");
+		Address newAddress = new Address();
 		mv.addObject("address", newAddress);
 		mv.addObject("addressType", addressType);
 		return mv;
@@ -128,10 +125,10 @@ public class ProfileController {
 	@RequestMapping(value = "/add/address", method = RequestMethod.POST)
 	public String addAddress(@Valid @ModelAttribute("address") Address address, BindingResult results) {
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account currentUser = accountDAO.get(auth.getName());
+		AccountModel model = (AccountModel) session.getAttribute("accountModel");
+
 		if (!results.hasErrors()) {
-			address.setAccountId(currentUser.getId());
+			address.setAccountId(model.getId());
 			addressDAO.addAddress(address);
 			if (address.isBilling()) {
 				return "redirect:/profile/show?success=billing_address";
@@ -139,15 +136,12 @@ public class ProfileController {
 				return "redirect:/profile/show?success=shipping_address";
 			}
 		} else {
-			return "redirect:/profile/show";
+			return "redirect:/profile/show?error=adding_address";
 		}
 	}
 
 	@RequestMapping(value = "/update/address", method = RequestMethod.POST)
 	public String updateAddress(@Valid @ModelAttribute("address") Address address, BindingResult results) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account currentUser = accountDAO.get(auth.getName());
 
 		if (!results.hasErrors()) {
 
@@ -163,20 +157,21 @@ public class ProfileController {
 	@RequestMapping(value = "/update/address", method = RequestMethod.GET)
 	public ModelAndView goUpdateAddress() {
 		ModelAndView mv = new ModelAndView("home");
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account currentUser = accountDAO.get(auth.getName());
 
-		Address currentAddress = addressDAO.getBillingAddress(currentUser.getId());
+		AccountModel model = (AccountModel) session.getAttribute("accountModel");
+
+		Address currentAddress = addressDAO.getBillingAddress(model.getId());
 		if (currentAddress != null) {
 			mv.addObject("title", "Address Management");
 			mv.addObject("userClickedUpdateAddress", true);
 			mv.addObject("address", currentAddress);
 			return mv;
 		} else {
-			Address newAddress = new Address();
-			mv.addObject("title", "Address Management");
-			mv.addObject("userClickedAddAddress", true);
-			mv.addObject("address", newAddress);
+			Account account = accountDAO.get(model.getId());
+			mv.addObject("title", "Profile");
+			mv.addObject("userClickedProfile", true);
+			mv.addObject("account", account);
+			mv.addObject("message", "You do not have any billing addresses, so it is impossible to update one.");
 			return mv;
 		}
 	}

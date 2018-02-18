@@ -27,8 +27,5 @@ public class FileUploadUtility {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	
-	
+	}	
 }

@@ -22,10 +22,11 @@ public class HibernateConfig {
 	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/onlineshop";
 	private final static String DATABASE_USERNAME = "skrzyppp";
 	private final static String DATABASE_PASSWORD = "lebron23";
-
-	// Hibernate needs to distinguish what syntax(dialect) to use for specific database.
+	// Hibernate needs to distinguish what syntax(dialect) to use for specific
+	// database.
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 
+	
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 
@@ -40,7 +41,6 @@ public class HibernateConfig {
 		return dataSource;
 
 	}
-
 	// we use this method to connect database with our entity classes, to set
 	// properties for Hibernate (look below) and then pack all of this into session
 	// factory that manage the whole connection between db and entities (by using
@@ -76,5 +76,10 @@ public class HibernateConfig {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 		return transactionManager;
 	}
+	
+/*	 @Bean
+	    public HibernateTemplate hibernateTemplate(SessionFactory sessionFactory) {
+	        return new HibernateTemplate(sessionFactory);
+	    }*/
 
 }

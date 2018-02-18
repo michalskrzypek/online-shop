@@ -10,9 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import javax.validation.constraints.Pattern;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +44,7 @@ public class Account implements Serializable {
 	
 	private boolean active;
 	
-	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[A-Za-z]{2,6}$", message = "Enter proper email.")
+	@Email
 	@NotBlank
 	private String email;
 	
