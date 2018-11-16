@@ -1,26 +1,15 @@
 # Online Shop
-Java web application based on Data Access Object (DAO) design pattern. It is a completely functional online store with role-based access control. To create the application I used following:
-
+Java web application based on Spring MVC and Data Access Object (DAO) design pattern. It is a completely functional online store with role-based access control. To create the application I used following:
 •	Spring (Core, MVC, Security)
-
 •	Hibernate and JPA	
-
 •	MySQL	
-
 •	JSP technology
-
 •	Tomcat 8	
-
 •	Maven tool	
-
 •	JSTL	
-
 •	jQuery plugins (DataTables and Validate)
-
 •	Front-End layer: customized Bootstrap (CSS + JavaScript)	
-
 •	few auxiliary functions in JavaScript language		 
-
 
 ## How does it look like?
 #### Customer access:
