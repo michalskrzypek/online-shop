@@ -29,7 +29,7 @@ public class AddressDAOImpl implements AddressDAO{
 
 	public Address getBillingAddress(int accountId) {
 		try {
-			String dbQuery = "FROM Address WHERE accountId = :accountId and isBilling = :isBilling";
+			String dbQuery = "FROM Address WHERE accountId = :accountId and is_billing = :isBilling";
 			return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class)
 					.setParameter("accountId", accountId).setParameter("isBilling", true).getSingleResult();
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class AddressDAOImpl implements AddressDAO{
 
 	public List<Address> getShippingAddresses(int accountId) {
 		try {
-			String dbQuery = "FROM Address WHERE accountId = :accountId and isShipping = :isShipping";
+			String dbQuery = "FROM Address WHERE accountId = :accountId and is_shipping = :isShipping";
 			return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class)
 					.setParameter("accountId", accountId).setParameter("isShipping", true).getResultList();
 

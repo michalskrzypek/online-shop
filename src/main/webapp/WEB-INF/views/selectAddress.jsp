@@ -231,8 +231,8 @@
 
 								<sf:hidden path="id" />
 								<sf:hidden path="accountId" />
-								<sf:hidden path="isShipping" />
-								<sf:hidden path="isBilling" />
+								<sf:hidden path="shipping" />
+								<sf:hidden path="billing" />
 
 
 								<div class="form-group ">

@@ -14,14 +14,14 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = { "pl.michalskrzypek.entity" })
+//@ComponentScan(basePackages = { "pl.michalskrzypek.entity" })
 @EnableTransactionManagement
 public class HibernateConfig {
 
 	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
 	private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/onlineshop";
-	private final static String DATABASE_USERNAME = "skrzyppp";
-	private final static String DATABASE_PASSWORD = "lebron23";
+	private final static String DATABASE_USERNAME = "admin";
+	private final static String DATABASE_PASSWORD = "admin";
 	// Hibernate needs to distinguish what syntax(dialect) to use for specific
 	// database.
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";

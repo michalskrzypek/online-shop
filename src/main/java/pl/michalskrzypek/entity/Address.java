@@ -55,9 +55,9 @@ public class Address {
 	private String postalCode;
 
 	@Column(name = "is_billing")
-	private boolean isBilling;
+	private boolean billing;
 
 	@Column(name = "is_shipping")
-	private boolean isShipping;
+	private boolean shipping;
 
 }
