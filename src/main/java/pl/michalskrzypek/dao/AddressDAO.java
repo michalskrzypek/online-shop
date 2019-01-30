@@ -2,6 +2,7 @@ package pl.michalskrzypek.dao;
 
 import java.util.List;
 
+import pl.michalskrzypek.entity.Account;
 import pl.michalskrzypek.entity.Address;
 
 public interface AddressDAO {
@@ -9,7 +10,7 @@ public interface AddressDAO {
 	//Addresses management
 	public boolean addAddress(Address address);
 	
-//	public Address getBillingAddress(Account account);
+	public Address getBillingAddress(Account account);
 	public Address getBillingAddress(int accountId);
 	
 	public Address getAddress(int addressId);

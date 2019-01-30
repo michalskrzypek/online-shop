@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.michalskrzypek.dao.AddressDAO;
+import pl.michalskrzypek.entity.Account;
 import pl.michalskrzypek.entity.Address;
 
 @Repository("addressDAO")
@@ -27,11 +28,11 @@ public class AddressDAOImpl implements AddressDAO{
 		}
 	}
 
-	public Address getBillingAddress(int accountId) {
+	public Address getBillingAddress(Account account) {
 		try {
-			String dbQuery = "FROM Address WHERE accountId = :accountId and isBilling = :isBilling";
+			String dbQuery = "FROM Address WHERE account_id = :account and is_billing = :isBilling";
 			return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class)
-					.setParameter("accountId", accountId).setParameter("isBilling", true).getSingleResult();
+					.setParameter("account", account).setParameter("isBilling", true).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -63,9 +64,9 @@ public class AddressDAOImpl implements AddressDAO{
 
 	public List<Address> getShippingAddresses(int accountId) {
 		try {
-			String dbQuery = "FROM Address WHERE accountId = :accountId and isShipping = :isShipping";
+			String dbQuery = "FROM Address WHERE account_id = :account and is_shipping = :isShipping";
 			return sessionFactory.getCurrentSession().createQuery(dbQuery, Address.class)
-					.setParameter("accountId", accountId).setParameter("isShipping", true).getResultList();
+					.setParameter("account", accountId).setParameter("isShipping", true).getResultList();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,5 +86,9 @@ public class AddressDAOImpl implements AddressDAO{
 		}
 	}
 
-	
+	@Override
+	public Address getBillingAddress(int accountId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

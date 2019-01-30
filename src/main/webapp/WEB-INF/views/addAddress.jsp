@@ -134,8 +134,7 @@
 						</fieldset>
 
 						<sf:hidden path="id" />
-						<sf:hidden path="accountId" />
-		
+
 
 						<div class="form-group ">
 							<input type="submit" id="button"

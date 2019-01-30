@@ -1,6 +1,7 @@
 package pl.michalskrzypek.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -54,9 +56,12 @@ public class Account implements Serializable {
 	@NotBlank
 	@Column(name = "contact_number")
 	private String phoneNumber;
+	
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses;
 
 	@OneToOne(mappedBy="account", cascade = CascadeType.ALL)
-	Cart cart;
+	private Cart cart;
 	
 	@Transient
 	private MultipartFile file;

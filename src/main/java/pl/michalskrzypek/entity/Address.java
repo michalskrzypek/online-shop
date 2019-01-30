@@ -1,5 +1,6 @@
 package pl.michalskrzypek.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,42 +23,34 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	/*
-	 * @ManyToOne Account account;
-	 * 
-	 * public Account getAccount() { return account; }
-	 * 
-	 * public void setAccount(Account account) { this.account = account; }
-	 */
-
-	@Column(name = "account_id")
-	private int accountId;
+	@ManyToOne
+	private Account account;
 
 	@Column(name = "first_name")
 	@NotBlank
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	@NotBlank
 	private String lastName;
 
 	@NotBlank
 	private String street;
-	
+
 	@NotBlank
 	private String city;
-	
+
 	@NotBlank
 	private String country;
-	
+
 	@NotBlank
 	@Column(name = "postal_code")
 	private String postalCode;
 
 	@Column(name = "is_billing")
-	private boolean isBilling;
+	private boolean billing;
 
 	@Column(name = "is_shipping")
-	private boolean isShipping;
+	private boolean shipping;
 
 }

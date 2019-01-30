@@ -58,9 +58,9 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	public Account get(String email) {
-		// TODO Auto-generated method stub
 		String selectQuery = "FROM Account WHERE email = :email";
 		try {
+			System.out.println("EMAIL TO : " + email);
 			return sessionFactory.getCurrentSession().createQuery(selectQuery, Account.class)
 					.setParameter("email", email).getSingleResult();
 
