@@ -84,21 +84,9 @@
 						<c:if test="${showReceipt  == true}">
 							<%@include file="receipt.jsp"%>
 						</c:if>
-
-
-
-
-
-
-
-
-
 					</div>
 				</div>
 			</div>
-
-
-
 
 		</div>
 		<!-- Footer -->

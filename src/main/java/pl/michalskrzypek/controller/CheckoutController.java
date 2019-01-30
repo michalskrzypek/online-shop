@@ -129,10 +129,12 @@ public class CheckoutController {
 	public ModelAndView addNewShippingAddress(@Valid @ModelAttribute("address") Address address,
 			BindingResult results) {
 		ModelAndView mv = new ModelAndView("checkout");
-		
 		CheckoutModel model = (CheckoutModel) session.getAttribute("checkoutModel");
+		
 		if (!results.hasErrors()) {
-			address.setAccountId(model.getAccount().getId());
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Account account = accountDAO.get(authentication.getName());
+			address.setAccount(account);
 			address.setShipping(true);
 			address.setBilling(false);
 			addressDAO.addAddress(address);

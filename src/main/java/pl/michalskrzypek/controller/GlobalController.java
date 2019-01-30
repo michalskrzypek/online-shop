@@ -58,7 +58,6 @@ public class GlobalController {
 		if(session.getAttribute("accountModel") == null) {
 			
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			
 			account = accountDAO.get(authentication.getName());
 			
 			if(account != null) {

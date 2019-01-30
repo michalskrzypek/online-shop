@@ -28,7 +28,7 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	public Cart getCart(int accountId) {
-		String dbQuery = "FROM Cart where accountId = :accountId";
+		String dbQuery = "FROM Cart where account_id = :accountId";
 		Query query = sessionFactory.getCurrentSession().createQuery(dbQuery, Cart.class);
 		query.setParameter("accountId", accountId);
 		return (Cart) query.getSingleResult();

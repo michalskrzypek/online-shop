@@ -230,7 +230,6 @@
 								</div>
 
 								<sf:hidden path="id" />
-								<sf:hidden path="accountId" />
 								<sf:hidden path="shipping" />
 								<sf:hidden path="billing" />
 

@@ -49,10 +49,12 @@ public class CheckoutService {
 	ProductService productService;
 
 	public void placeOrder(CheckoutModel model, List<CartLine> itemsList) {
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Account account = accountDAO.get(authentication.getName());
+		
 		OrderDetail order = new OrderDetail();
-		order.setAccountId(model.getAccount().getId());
-		order.setBillingId(addressDAO.getBillingAddress(model.getAccount().getId()).getId());
+		order.setAccountId(account.getId());
+		order.setBillingId(addressDAO.getBillingAddress(account).getId());
 		order.setShippingId(model.getShipping().getId());
 		order.setOrderDate(new Date());
 		order.setOrderCount(model.getCartLines().size());
@@ -80,9 +82,6 @@ public class CheckoutService {
 		currentCart.setTotal(0);
 		cartDAO.updateCart(currentCart);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account account = accountDAO.get(auth.getName());
 		account.setCart(currentCart);
 	}
-
 }
